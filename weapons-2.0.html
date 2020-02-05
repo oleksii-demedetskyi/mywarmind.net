@@ -1,0 +1,482 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Weapons | My warmind</title>
+    <meta name="description" content="My warmind">
+    <meta name="author" content="Rasputin">
+</head>
+
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0"></script>
+
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    svg {
+        padding: 5px;
+        flex: 1;
+    }
+</style>
+
+<script>
+    function formCategories(items) {
+        let categories = new Map()
+        let categoriesKeys = new Map()
+
+        function appendItem(instance, category, type, extras) {
+            let categoryKey = `${type}_${category}`
+
+            let socket = (extras || {}).socket
+            if (socket) {
+                categoryKey += `_${socket}`
+            }
+
+            let perkNumber = (extras || {}).perkNumber
+            if (perkNumber) {
+                categoryKey += `_${perkNumber}`
+            }
+
+            if (!categories.has(categoryKey)) {
+                categories.set(categoryKey, [])
+                categoriesKeys.set(categoryKey, { category, type, ...extras })
+            }
+
+            categories.get(categoryKey).push(instance)
+        }
+
+        for (let instance of items) {
+            let item = weapons.items[instance]
+            let definition = weapons.definitions.items[item.hash]
+
+            appendItem(instance, item.hash, "hash")
+            appendItem(instance, item.damageType, "damage")
+            appendItem(instance, definition.equippingBlock.ammoType, "ammo")
+
+            for (let itemCategory of definition.itemCategoryHashes) {
+                appendItem(instance, itemCategory, "category")
+            }
+
+            let perkNumber = 0
+            for (let socket in item.sockets) {
+                let socketedPlug = item.sockets[socket].plugHash
+                if (socketedPlug && (weapons.definitions.plugs[socketedPlug].itemCategoryHashes.indexOf(3708671066) != -1)) {
+                    perkNumber += 1
+                }
+
+                if (item.plugs[socket]) {
+                    for (let plug of item.plugs[socket]) {
+                        let plugHash = plug.plugItemHash
+
+                        let plugCategories = weapons.definitions.plugs[plugHash].itemCategoryHashes
+                        if (plugCategories.indexOf(3708671066) != -1) {
+                            appendItem(instance, plugHash, "plug", { socket, perkNumber })
+                        } else {
+                            appendItem(instance, plugHash, "plug", { socket })
+                        }
+                    }
+                } else {
+                    let plugHash = item.sockets[socket].plugHash
+                    if (!plugHash) continue
+
+                    let plugCategories = weapons.definitions.plugs[plugHash].itemCategoryHashes
+                    if (plugCategories.indexOf(3708671066) != -1) {
+                        appendItem(instance, plugHash, "plug", { socket, perkNumber })
+                    } else {
+                        appendItem(instance, plugHash, "plug", { socket })
+                    }
+                }
+            }
+        }
+
+        for (let [category, categoryItems] of categories) {
+            if (items.length == categoryItems.length) {
+                categories.delete(category)
+                categoriesKeys.delete(category)
+            }
+        }
+
+        return {
+            categories,
+            categoriesKeys
+        }
+    }
+</script>
+<script>
+    _ = async function () { data() }()
+    async function data() {
+        let url = "https://gist.githubusercontent.com/AlexeyDemedetskiy/9a4ba9013c9c09392713088b9e3722d2/raw/5f9fa3bef7c6c421b35ab863aee87251c2b7c922/example-weapons.json"
+        let response = await fetch(url)
+        weapons = await response.json()
+
+        let width = window.innerWidth * 2 / 3
+        let height = window.innerHeight
+
+        const svg = d3.select("body").append("svg").attr("viewBox", [0, 0, width, height])
+        const nodeContainer = svg.append("g").attr("stroke", "#000")
+        const textContainer = svg.append("g").style("font", "10px sans-serif")
+        const linkContainer = svg.append("g").attr("fill", "none").attr("stroke-opacity", 0.5)
+
+        let allItems = Object.keys(weapons.items)
+        let fullCategories = formCategories(allItems)
+
+        let filters = window.location.hash.substr(1).split(',').filter(f => f.length > 0)
+        render(filters)
+
+        function render(filters) {
+            let items = allItems
+            for (let filter of filters) {
+                if (!fullCategories.categories.has(filter)) continue
+
+                let categoryItems = new Set(fullCategories.categories.get(filter))
+                items = items.filter(Set.prototype.has, categoryItems)
+            }
+
+            let { categories, categoriesKeys } = formCategories(items)
+
+            function categoryName(key) {
+                if (!categoriesKeys.has(key)) return ""
+                let { category, type } = categoriesKeys.get(key)
+                switch (type) {
+                    case "category": return weapons.definitions.categories[category].displayProperties.name
+                    case "plug-category": return weapons.definitions.categories[category].displayProperties.name
+                    case "hash": return weapons.definitions.items[category].displayProperties.name
+                    case "plug": return weapons.definitions.plugs[category].displayProperties.name
+                    default: return key
+                }
+            }
+
+            const graph = { "nodes": [], "links": [] };
+
+            let slot = [
+                "category_2",
+                "category_3",
+                "category_4",
+            ].filter(c => categories.has(c))
+
+            let ammo = [
+                "ammo_1",
+                "ammo_2",
+                "ammo_3"
+            ].filter(c => categories.has(c))
+
+            let damages = [
+                "damage_3373582085",
+                "damage_3454344768",
+                "damage_2303181850",
+                "damage_1847026933"
+            ].filter(c => categories.has(c))
+
+            let weaponTypes = [...categoriesKeys.keys()].filter(c => {
+                if (slot.indexOf(c) != -1) return false // exclude slot categories
+                if (categoriesKeys.get(c).type != "category") return false // exclude not categories
+                return true
+            })
+
+            function plugsInSocket(socket) {
+                return [...categoriesKeys.keys()].filter(c => {
+                    let key = categoriesKeys.get(c)
+                    if (key.type != "plug") return false
+                    if (key.socket != socket) return false
+
+                    return true
+                })
+            }
+
+            function plugsInPerkSlot(slot) {
+                return [...categoriesKeys.keys()].filter(c => {
+                    let key = categoriesKeys.get(c)
+                    if (key.type != "plug") return false
+                    if (key.perkNumber != slot) return false
+
+                    return true
+                })
+            }
+
+            function plugsInCategory(category) {
+                return [...categoriesKeys.keys()].filter(c => {
+                    if (categoriesKeys.get(c).type != "plug") return false // exclude not categories
+                    let plug = categoriesKeys.get(c).category
+                    let plugDefinition = weapons.definitions.plugs[plug]
+                    if (plugDefinition.itemCategoryHashes.indexOf(category) == -1) return false
+
+                    return true
+                })
+            }
+
+            let intrinsics = plugsInCategory(2237038328)
+
+            // First row
+            let scopes = plugsInCategory(2411768833)
+            let barrels = plugsInCategory(3085181971)
+            let sights = plugsInCategory(3866509906)
+            let tubes = plugsInCategory(2076918099)
+            let bowstring = plugsInCategory(444756050)
+            let blades = plugsInCategory(1709863189)
+
+            let firstRow = [].concat(scopes, barrels, sights, tubes, bowstring, blades)
+
+            // Second row
+            let guards = plugsInCategory(3072652064)
+            let magazines = plugsInCategory(4184407433)
+            let batteries = plugsInCategory(1334054322)
+            let arrows = plugsInCategory(3360831066)
+
+            let secondRow = [].concat(guards, magazines, batteries, arrows)
+
+            let perk1 = plugsInPerkSlot(1)
+            let perk2 = plugsInPerkSlot(2)
+
+            let hashes = [...categoriesKeys.keys()].filter(c => categoriesKeys.get(c).type === "hash")
+
+            let nodesSet = new Set()
+
+            function linkLists(sourceList, targetList) {
+                for (let source of sourceList) {
+                    nodesSet.add(source)
+                    for (let target of targetList) {
+                        if (source === target) continue
+                        nodesSet.add(target)
+
+                        let sourceItems = categories.get(source)
+                        if (!sourceItems) continue
+
+                        let targetItems = categories.get(target)
+                        if (!targetItems) continue
+
+                        let targetSet = new Set(targetItems)
+
+                        let sharedItems = sourceItems.filter(Set.prototype.has, targetSet)
+                        if (sharedItems.length === 0) continue
+
+                        graph.links.push({
+                            source: source,
+                            target: target,
+                            value: sharedItems.length,
+                            items: sharedItems
+                        })
+                    }
+                }
+            }
+
+            function linkAllLists(lists) {
+                for (let i = 0; i < lists.length - 1; i++) {
+                    linkLists(lists[i], lists[i + 1])
+                }
+            }
+
+            let columns = [
+                slot,
+                damages,
+                ammo,
+                weaponTypes,
+                intrinsics,
+                hashes,
+                perk1,
+                perk2,
+                // firstRow,
+                // secondRow,
+            ]
+
+            columns = columns.filter(l => l.length > 0)
+            //columns = columns.slice(0, 8)
+
+            linkAllLists(columns)
+
+            graph.nodes = [...nodesSet].map(n => ({
+                name: n,
+                items: categories.get(n)
+            }))
+
+            let color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            const sankey = d3.sankey()
+                .nodeId(d => d.name)
+                .nodeAlign(d3.sankeyLeft)
+                .nodeWidth(15)
+                .nodePadding(0)
+                .extent([[1, 5], [width - 1, height - 5]]);
+
+            let { nodes, links } = sankey(graph)
+
+            function selectLink(selectedLink) {
+                let newFilters = [...filters, selectedLink.source.name, selectedLink.target.name]
+                history.pushState({ filters: newFilters }, null, `#${newFilters.join(',')}`);
+                render(newFilters)
+            }
+
+            function selectNode(selectNode) {
+                let newFilters = [...filters, selectNode.name]
+                history.pushState({ filters: newFilters }, null, `#${newFilters.join(',')}`);
+                render(newFilters)
+            }
+
+            function isItemsIntersects(a, b) {
+                let commonItems = a.filter(Set.prototype.has, new Set(b))
+                return commonItems.length > 0
+            }
+
+            function mouseOverLink(selectedLink) {
+                link.attr("opacity", d => isItemsIntersects(selectedLink.items, d.items) ? 1 : 0.3)
+
+                node.attr("opacity", n => {
+                    if (isItemsIntersects(selectedLink.items, n.items)) return 1
+                    return 0.3
+                })
+
+                text.attr("opacity", n => {
+                    if (isItemsIntersects(selectedLink.items, n.items)) return 1
+                    return 0.3
+                })
+            }
+
+            function mouseOutLink() {
+                link.attr("opacity", 1)
+                node.attr("opacity", 1)
+                text.attr("opacity", 1)
+            }
+
+            function mouseOverNode(selectedNode) {
+                node.attr("opacity", d => {
+                    if (isItemsIntersects(selectedNode.items, d.items)) return 1
+
+                    return 0.3
+                })
+
+                text.attr("opacity", d => {
+                    if (isItemsIntersects(selectedNode.items, d.items)) return 1
+
+                    return 0.3
+                })
+
+
+                link.attr("opacity", l => {
+                    if (isItemsIntersects(selectedNode.items, l.items)) return 1
+
+                    return 0.3
+                })
+            }
+
+            function mouseOutNode() {
+                node.attr("opacity", 1)
+                link.attr("opacity", 1)
+                text.attr("opacity", 1)
+            }
+
+            const node = nodeContainer
+                .selectAll("rect")
+                .data(nodes)
+                .join(enter => enter
+                    .append("rect")
+                    .call(u => u.append("title"))
+                )
+                .attr("x", d => d.x0)
+                .attr("y", d => d.y0)
+                .attr("height", d => d.y1 - d.y0)
+                .attr("width", d => d.x1 - d.x0)
+                .attr("fill", d => color(d.name))
+                .on("mouseover", mouseOverNode)
+                .on("mouseout", mouseOutNode)
+                .on("click", selectNode)
+
+            node.select("title").text(d => d.name)
+
+            const link = linkContainer
+                .selectAll("g")
+                .data(links)
+                .join(enter => enter
+                    .append("g")
+                    .call(u => u.append("path"))
+                    .call(u => u.append("title"))
+                    .call(u => u.append("linearGradient")
+                        .call(u => u.append("stop").attr("offset", "0%"))
+                        .call(u => u.append("stop").attr("offset", "100%"))
+                    )
+                )
+                .style("mix-blend-mode", "multiply")
+                .on("mouseover", mouseOverLink)
+                .on("mouseout", mouseOutLink)
+                .on("click", selectLink)
+
+            const gradient = link.select("linearGradient")
+                .attr("id", d => `${d.source.name}-${d.target.name}`)
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", d => d.source.x1)
+                .attr("x2", d => d.target.x0);
+
+            gradient.select(`stop[offset="0%"]`)
+                .attr("stop-color", d => color(d.source.name));
+
+            gradient.select(`stop[offset="100%"]`)
+                .attr("stop-color", d => color(d.target.name));
+
+            link.select("path")
+                .attr("d", d3.sankeyLinkHorizontal())
+                .attr("stroke", d => `url(#${d.source.name}-${d.target.name})`)
+                .attr("stroke-width", d => Math.max(1, d.width))
+
+            link.select("title")
+                .text(d => `${categoryName(d.source.name)} → ${categoryName(d.target.name)}\n${d.value}`);
+
+            const text = textContainer
+                .selectAll("text")
+                .data(nodes)
+                .join("text")
+                .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+                .attr("y", d => (d.y1 + d.y0) / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+                .text(d => categoryName(d.name));
+        }
+
+        window.onpopstate = function (event) {
+            console.log(event)
+            if (event.state) {
+                render(event.state.filters)
+            } else {
+                render([])
+            }
+        }
+    }
+</script>
+
+<script>
+    function selectSpan(span) {
+        span.querySelector("input").toggleAttribute("checked")    
+    }
+</script>
+<style>
+    #settings > span {
+        cursor: pointer;
+        user-select: none;
+    }
+</style>
+<body>
+    <!-- <div id="settings">
+        <span onclick="selectSpan(this)"><input type="checkbox" name="slot">Show slot</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="damage">Show damage</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="ammo">Show ammo</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="type">Show type</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="archetype">Show archetype</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="item">Show item</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="perk_1">Show first frame perk</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="perk_2">Show second frame perk</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="stats_1">Show first stats perk</span>
+        <span onclick="selectSpan(this)"><input type="checkbox" name="stats_2">Show second stats perk</span>
+    </div> -->
+</body>
+
+</html>

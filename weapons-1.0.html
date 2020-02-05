@@ -1,0 +1,454 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Weapons | My warmind</title>
+    <meta name="description" content="My warmind">
+    <meta name="author" content="Rasputin">
+</head>
+
+<script>
+    let tau = Math.PI * 2;
+    let max = Math.max;
+
+    function compareValue(compare) {
+        return function (a, b) {
+            return compare(
+                a.source.value + a.target.value,
+                b.source.value + b.target.value
+            );
+        };
+    }
+
+    function my_chord() {
+        var padAngle = 0,
+            sortGroups = null,
+            sortSubgroups = null,
+            sortChords = null;
+
+        function chord(matrix) {
+            var n = matrix.length,
+                groupSums = [],
+                groupIndex = d3.range(n),
+                subgroupIndex = [],
+                chords = [],
+                groups = chords.groups = new Array(n),
+                subgroups = new Array(n * n),
+                k,
+                x,
+                x0,
+                dx,
+                i,
+                j;
+
+            // Compute the sum.
+            k = 0, i = -1; while (++i < n) {
+                x = 0, j = -1; while (++j < n) {
+                    x += matrix[i][j];
+                }
+                groupSums.push(x);
+
+                /// Make chords sorted by distance between groups
+                let numSeq = []
+                for (var m = 0; m < n; m++) {
+                    numSeq[m] = (n + (i - 1) - m) % n;
+                }
+                subgroupIndex.push(numSeq);
+
+                /// Original code
+                //subgroupIndex.push(d3.range(n));
+
+                k += x;
+            }
+
+            // Sort groups…
+            if (sortGroups) groupIndex.sort(function (a, b) {
+                return sortGroups(groupSums[a], groupSums[b], a, b, n);
+            });
+
+            // Sort subgroups…
+            if (sortSubgroups) subgroupIndex.forEach(function (d, i) {
+                d.sort(function (a, b) {
+                    return sortSubgroups(matrix[i][a], matrix[i][b], i, a, b, n);
+                });
+            });
+
+            // Convert the sum to scaling factor for [0, 2pi].
+            // TODO Allow start and end angle to be specified?
+            // TODO Allow padding to be specified as percentage?
+            k = max(0, tau - padAngle * n) / k;
+            dx = k ? padAngle : tau / n;
+
+            // Compute the start and end angle for each group and subgroup.
+            // Note: Opera has a bug reordering object literal properties!
+            x = 0, i = -1; while (++i < n) {
+                x0 = x, j = -1; while (++j < n) {
+                    var di = groupIndex[i],
+                        dj = subgroupIndex[di][j],
+                        v = matrix[di][dj],
+                        a0 = x,
+                        a1 = x += v * k;
+                    subgroups[dj * n + di] = {
+                        index: di,
+                        subindex: dj,
+                        startAngle: a0,
+                        endAngle: a1,
+                        value: v
+                    };
+                }
+                groups[di] = {
+                    index: di,
+                    startAngle: x0,
+                    endAngle: x,
+                    value: groupSums[di]
+                };
+                x += dx;
+            }
+
+            // Generate chords for each (non-empty) subgroup-subgroup link.
+            i = -1; while (++i < n) {
+                j = i - 1; while (++j < n) {
+                    var source = subgroups[j * n + i],
+                        target = subgroups[i * n + j];
+                    if (source.value || target.value) {
+                        chords.push(source.value < target.value
+                            ? { source: target, target: source }
+                            : { source: source, target: target });
+                    }
+                }
+            }
+
+            return sortChords ? chords.sort(sortChords) : chords;
+        }
+
+        chord.padAngle = function (_) {
+            return arguments.length ? (padAngle = max(0, _), chord) : padAngle;
+        };
+
+        chord.sortGroups = function (_) {
+            return arguments.length ? (sortGroups = _, chord) : sortGroups;
+        };
+
+        chord.sortSubgroups = function (_) {
+            return arguments.length ? (sortSubgroups = _, chord) : sortSubgroups;
+        };
+
+        chord.sortChords = function (_) {
+            return arguments.length ? (_ == null ? sortChords = null : (sortChords = compareValue(_))._ = _, chord) : sortChords && sortChords._;
+        };
+
+        return chord;
+    }
+</script>
+
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+    @media (orientation:portrait) {
+        svg {
+            width: 100vw;
+            height: 100vw;
+        }
+    }
+
+    @media (orientation:landscape) {
+        svg {
+            width: 100vh;
+            height: 100vh;
+        }
+    }
+</style>
+
+<script>
+    _ = async function () { data() }()
+    async function data() {
+        let url = "https://gist.githubusercontent.com/AlexeyDemedetskiy/9a4ba9013c9c09392713088b9e3722d2/raw/5f9fa3bef7c6c421b35ab863aee87251c2b7c922/example-weapons.json"
+        let response = await fetch(url)
+        let weapons = await response.json()
+        let allItems = Object.keys(weapons.items)
+
+        let width = 1000
+        let height = 1000
+
+        let outerRadius = Math.min(width, height) * 0.5
+        let innerRadius = outerRadius - 200
+
+        d3.select("body")
+            .append("button")
+            .text("Show all")
+            .on("click", () => render(allItems))
+
+        const svg = d3.select("body").append("svg")
+            .attr("viewBox", [-width / 2, -height / 2, width, height])
+            .attr("font-size", 12)
+            .attr("font-family", "sans-serif")
+
+
+        let chord = my_chord()
+            .padAngle(.01)
+
+        let arc = d3.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(innerRadius + 20)
+
+        let ribbon = d3.ribbon()
+            .radius(innerRadius)
+
+        let color = d3.scaleOrdinal(d3.schemeCategory10)
+
+        function formCategories(items) {
+            let categories = new Map()
+            let categoriesKeys = new Map()
+
+            function appendItem(instance, category, type) {
+                let categoryKey = `${type}_${category}`
+
+                if (!categories.has(categoryKey)) {
+                    categories.set(categoryKey, [])
+                    categoriesKeys.set(categoryKey, { category, type })
+                }
+
+                categories.get(categoryKey).push(instance)
+            }
+
+            for (let instance of items) {
+                let item = weapons.items[instance]
+                let definition = weapons.definitions.items[item.hash]
+
+                appendItem(instance, item.hash, "hash")
+                appendItem(instance, item.damageType, "damage")
+                appendItem(instance, definition.equippingBlock.ammoType, "ammo")
+
+                for (let itemCategory of definition.itemCategoryHashes) {
+                    appendItem(instance, itemCategory, "category")
+                }
+
+                for (let socket in item.sockets) {
+                    let plug = item.sockets[socket].plugHash
+                    if (!plug) continue
+                    let plugDefinition = weapons.definitions.plugs[plug]
+                    let plugCategories = plugDefinition.itemCategoryHashes
+
+                    // Ignore shaders
+                    if (plugCategories.indexOf(41) !== -1) {
+                        continue
+                    }
+
+                    if (plugCategories.indexOf(52) !== -1) {
+                        continue
+                    }
+
+                    // Ignore masterworks
+                    if (plugCategories.indexOf(59) !== -1 && plugCategories.length == 1) {
+                        continue
+                    }
+                    
+                    // Ignore empty mod socket
+                    if (plug == 2323986101) {
+                        continue
+                    }
+
+                    appendItem(instance, plug, "plug")
+
+                    // for (let category of plugCategories) {
+                    //     if (category == 52) continue
+                    //     if (category == 56) continue
+                    //     if (category == 59) continue
+                    //     if (category == 610365472) continue
+                    //     if (category == 3708671066) continue
+
+                    //     appendItem(instance, category, "plug-category")
+                    // }
+                }
+            }
+
+            for (let [category, categoryItems] of categories) {
+                if (categoryItems.length === items.length) {
+                    categories.delete(category)
+                }
+            }
+
+            return {
+                categories,
+                categoriesKeys
+            }
+        }
+
+        let groupContainer = svg.append("g")
+        let gradsContainer = svg.append("defs")
+        let ribbons = svg.append("g").attr("fill-opacity", 0.67)
+
+        function render(items) {
+            let { categories, categoriesKeys } = formCategories(items)
+
+            let categoriesBySize = [...categories.keys()].sort((a, b) => {
+                if (categoriesKeys.get(a).type === categoriesKeys.get(b).type)
+                    return categoriesKeys.get(a).category - categoriesKeys.get(b).category
+
+                let ratings = ["ammo", "damage", "category", "hash", "plug-category", "plug"]
+                return ratings.indexOf(categoriesKeys.get(a).type) - ratings.indexOf(categoriesKeys.get(b).type)
+            })
+
+            //categoriesBySize = categoriesBySize.slice(0, 30)
+
+            let matrix = []
+            for (let sourceCategory of categoriesBySize) {
+                let sourceItems = categories.get(sourceCategory)
+                let sourceFlow = []
+                matrix.push(sourceFlow)
+
+                for (let targetCategory of categoriesBySize) {
+                    if (sourceCategory === targetCategory) {
+                        sourceFlow.push(0)
+                        continue
+                    }
+
+                    let targetSet = new Set(categories.get(targetCategory))
+                    let commonItems = sourceItems.filter(Set.prototype.has, targetSet)
+
+                    if (commonItems.length == sourceItems.length) {
+                        sourceFlow.push(0)
+                        //sourceFlow.push(commonItems.length)
+                    } else {
+                        sourceFlow.push(commonItems.length)
+                    }
+                }
+            }
+
+            const chords = chord(matrix)
+
+            function onMouseOver(selected) {
+                if (selected.index !== undefined) {
+                    group
+                        .filter(d => d.index !== selected.index)
+                        .style("opacity", 0.3);
+
+                    svg.selectAll(".chord")
+                        .filter(d => (d.source.index !== selected.index) && (d.target.index !== selected.index))
+                        .style("opacity", 0.3);
+                }
+                if (selected.source !== undefined) {
+                    group
+                        .filter(d => (d.index !== selected.source.index) && (d.index !== selected.target.index))
+                        .style("opacity", 0.3);
+
+                    svg.selectAll(".chord")
+                        .filter(d => d !== selected)
+                        .style("opacity", 0.3);
+                }
+            }
+
+            function onMouseOut() {
+                group.style("opacity", 1);
+                svg.selectAll(".chord").style("opacity", 1);
+            }
+
+            function onSelect(selected) {
+                if (selected.index !== undefined) {
+                    let newItems = categories.get(categoriesBySize[selected.index])
+                    render(newItems)
+                }
+                if (selected.source !== undefined) {
+                    let sourceItems = categories.get(categoriesBySize[selected.source.index])
+                    let targetItems = categories.get(categoriesBySize[selected.target.index])
+
+                    let targetSet = new Set(targetItems)
+                    let newItems = sourceItems.filter(Set.prototype.has, targetSet)
+                    render(newItems)
+                }
+            }
+
+            function getGradID(d) { 
+                return `linkGrad-${categoriesBySize[d.source.index]}-${categoriesBySize[d.target.index]}`                
+            }
+
+            function categoryName(d) {
+                let key = categoriesBySize[d.index]
+                let {category, type} = categoriesKeys.get(key)
+                switch (type) {
+                    case "category": return weapons.definitions.categories[category].displayProperties.name
+                    case "plug-category": return weapons.definitions.categories[category].displayProperties.name
+                    case "hash": return weapons.definitions.items[category].displayProperties.name
+                    case "plug": return `${category} - ${weapons.definitions.plugs[category].displayProperties.name}`
+                    default: return key
+                }
+            }
+
+            gradsContainer.html(null)
+            let grads = gradsContainer.selectAll("linearGradient")
+                .data(chords)
+                .join(enter => {
+                    let grad = enter.append("linearGradient")
+                        .attr("id", getGradID)
+                        .attr("gradientUnits", "userSpaceOnUse")
+                    grad.append("stop").attr("offset", "0%")
+                    grad.append("stop").attr("offset", "100%")
+                    return grad
+                })
+                .attr("id", getGradID)
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", function (d) { return innerRadius * Math.cos((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2); })
+                .attr("y1", function (d) { return innerRadius * Math.sin((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2); })
+                .attr("x2", function (d) { return innerRadius * Math.cos((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2); })
+                .attr("y2", function (d) { return innerRadius * Math.sin((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2); })
+
+            grads.select('stop[offset="0%"')
+                .attr("stop-color", function (d) { return color(categoriesBySize[d.source.index]) })
+
+            grads.select('stop[offset="100%"')
+                .attr("stop-color", function (d) { return color(categoriesBySize[d.target.index]) })
+
+            let group = groupContainer.selectAll("g")
+                .data(chords.groups, d => categoriesBySize[d.index])
+                .join(
+                    enter => {
+                        let group = enter.append("g")
+                        group.append("path")
+                        group.append("text")
+                        return group
+                    }
+                )
+
+            group.select("path")
+                .on("mouseover", onMouseOver)
+                .on("mouseout", onMouseOut)
+                .on("click", onSelect)
+                .attr("fill", d => color(categoriesBySize[d.index]))
+                .attr("stroke", d => color(categoriesBySize[d.index]))
+                .attr("d", arc)
+
+            group.select("text")
+                .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })
+                .attr("dy", ".35em")
+                .attr("transform", d => `
+                    rotate(${(d.angle * 180 / Math.PI - 90)})
+                    translate(${innerRadius + 26})
+                    ${d.angle > Math.PI ? "rotate(180)" : ""}
+                `)
+                .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
+                .text(categoryName);
+
+            ribbons.selectAll("path")
+                .data(chords)
+                .join("path")
+                .on("mouseover", onMouseOver)
+                .on("mouseout", onMouseOut)
+                .on("click", onSelect)
+                .attr("class", "chord")
+                .style("fill", d => `url(#${getGradID(d)})`)
+                .attr("d", ribbon)
+        }
+
+        render(allItems)
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>

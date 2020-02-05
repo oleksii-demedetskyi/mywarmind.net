@@ -1,0 +1,177 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Loot My warmind</title>
+    <meta name="description" content="My warmind">
+    <meta name="author" content="Rasputin">
+</head>
+
+<body>
+    <style>
+        /* The container <div> - needed to position the dropdown content */
+        .pointer {
+            cursor: pointer;
+        }
+
+        .item-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .item-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .item-dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .item-dropdown a:hover {
+            background-color: #ddd
+        }
+
+        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+        .item-container.selected .item-dropdown {
+            display: block;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://braytech.org/static/css/main.1597e22b.chunk.css">
+    <link rel="stylesheet" href="https://braytech.org/static/fonts/Destiny-Symbols/style.css">
+    <link rel="stylesheet" href="https://braytech.org/static/fonts/Braytech/style.css">
+    <link rel="stylesheet" href="https://braytech.org/static/fonts/Neue-Haas-Grotesk/style.css">
+
+    <script>
+        /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+        function didSelectItem(selectedContainer) {
+            for (let container of document.querySelectorAll(`.item-container`)) {
+                if (container == selectedContainer) {
+                    container.classList.toggle("selected")
+                } else {
+                    container.classList.remove("selected")
+                }
+            }
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.addEventListener("click", function (event) {
+            if (!event.target.matches('.item-container *')) {
+                for (let container of document.querySelectorAll(".item-container.selected")) {
+                    container.classList.remove("selected")
+                }
+            }
+        })
+    </script>
+    <div id="items-grid"></div>
+    <div class="item-container">
+        <img class="pointer" onclick="didSelectItem(this.closest('.item-container'))" src="https://www.bungie.net/common/destiny2_content/icons/f01f13d34cdd246a233dbcb5418be7e2.jpg">
+        <div class="item-dropdown">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <img class="pointer" onclick="didSelectItem(this.closest('.item-container'))" src="https://www.bungie.net/common/destiny2_content/icons/f01f13d34cdd246a233dbcb5418be7e2.jpg">
+        <div class="item-dropdown">
+            <div id="tooltip" class="visible">
+                <div class="acryllic"></div>
+                <div class="frame equipment legendary">
+                    <div class="header">
+                        <div class="name">Какой то шлем</div>
+                        <div>
+                            <div class="kind">Шлем</div>
+                            <div class="rarity">Легендарный</div>
+                        </div>
+                    </div>
+                    <div class="black">
+                        <div class="damage weapon">
+                            <div class="power arc">
+                                <div class="icon arc"></div>
+                                <div class="text">930</div>
+                            </div>
+                            <div class="slot">
+                                <div class="icon primary"></div>
+                                <div class="text">Primary</div>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="flair">
+                            <p>"Но какое число? Почему именно оно, а не другие?" — Лакшми-2</p>
+                        </div>
+                        <div class="line"></div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="name">Урон</div>
+                                <div class="value bar">
+                                    <div class="bar" data-value="29" style="width: 28%;"></div>
+                                    <div class="int">29</div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Дальность стрельбы</div>
+                                <div class="value bar">
+                                    <div class="bar" data-value="58" style="width: 57%;"></div>
+                                    <div class="int">58</div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Удобство</div>
+                                <div class="value bar">
+                                    <div class="bar" data-value="54" style="width: 54%;"></div>
+                                    <div class="int">54</div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Стабильность</div>
+                                <div class="value bar">
+                                    <div class="bar" data-value="46" style="width: 46%;"></div>
+                                    <div class="int">46</div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Скорость перезарядки</div>
+                                <div class="value bar">
+                                    <div class="bar" data-value="24" style="width: 24%;"></div>
+                                    <div class="int">24</div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Выстрелов в минуту</div>
+                                <div class="value">
+                                    <div class="text">450 </div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <div class="name">Магазин</div>
+                                <div class="value">
+                                    <div class="text">39 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="source">
+                            <p>Источник: получайте ранговые наборы от Лакшми-2.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

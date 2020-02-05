@@ -1,0 +1,2581 @@
+{
+    "items": {
+      "6917529121902450501": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 6,
+          "resilence": 7,
+          "recovery": 12,
+          "discipline": 12,
+          "intellect": 7,
+          "strength": 17
+        },
+        "defence": 930,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529126773596229": {
+        "hash": 2670393359,
+        "stats": {
+          "mobility": 17,
+          "resilence": 7,
+          "recovery": 2,
+          "discipline": 12,
+          "intellect": 7,
+          "strength": 7
+        },
+        "defence": 946,
+        "energy": "arc",
+        "capacity": 4
+      },
+      "6917529123017269168": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 6,
+          "resilence": 19,
+          "recovery": 12,
+          "discipline": 13,
+          "intellect": 7,
+          "strength": 8
+        },
+        "defence": 944,
+        "energy": "solar",
+        "capacity": 7
+      },
+      "6917529126931839396": {
+        "hash": 468899627,
+        "stats": {},
+        "defence": 950,
+        "energy": "void",
+        "capacity": 6
+      },
+      "6917529126949579261": {
+        "hash": 1234228360,
+        "stats": {},
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529126954688963": {
+        "hash": 1234228360,
+        "stats": {},
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529126786143112": {
+        "hash": 2670393359,
+        "stats": {
+          "mobility": 2,
+          "resilence": 18,
+          "recovery": 6,
+          "discipline": 2,
+          "intellect": 7,
+          "strength": 17
+        },
+        "defence": 950,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529126949581419": {
+        "hash": 1895324274,
+        "stats": {
+          "mobility": 2,
+          "resilence": 12,
+          "recovery": 10,
+          "discipline": 11,
+          "intellect": 18,
+          "strength": 2
+        },
+        "defence": 949,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529126949573298": {
+        "hash": 1895324274,
+        "stats": {
+          "mobility": 14,
+          "resilence": 7,
+          "recovery": 6,
+          "discipline": 7,
+          "intellect": 8,
+          "strength": 15
+        },
+        "defence": 949,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529125823831372": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 11,
+          "resilence": 7,
+          "recovery": 9,
+          "discipline": 9,
+          "intellect": 13,
+          "strength": 8
+        },
+        "defence": 943,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529126351047170": {
+        "hash": 2320100699,
+        "stats": {
+          "mobility": 13,
+          "resilence": 6,
+          "recovery": 9,
+          "discipline": 13,
+          "intellect": 9,
+          "strength": 6
+        },
+        "defence": 946,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529123469162602": {
+        "hash": 2670393359,
+        "stats": {
+          "mobility": 6,
+          "resilence": 11,
+          "recovery": 7,
+          "discipline": 13,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 934,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529120251228592": {
+        "hash": 2468603406,
+        "stats": {
+          "mobility": 2,
+          "resilence": 13,
+          "recovery": 13,
+          "discipline": 13,
+          "intellect": 2,
+          "strength": 11
+        },
+        "defence": 922,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529123480615378": {
+        "hash": 2903026873,
+        "stats": {
+          "mobility": 6,
+          "resilence": 13,
+          "recovery": 7,
+          "discipline": 9,
+          "intellect": 7,
+          "strength": 12
+        },
+        "defence": 932,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529124520730949": {
+        "hash": 2670393359,
+        "stats": {
+          "mobility": 8,
+          "resilence": 2,
+          "recovery": 16,
+          "discipline": 2,
+          "intellect": 12,
+          "strength": 11
+        },
+        "defence": 936,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529126943650839": {
+        "hash": 530558102,
+        "stats": {
+          "mobility": 6,
+          "resilence": 12,
+          "recovery": 8,
+          "discipline": 6,
+          "intellect": 12,
+          "strength": 7
+        },
+        "defence": 948,
+        "energy": "arc",
+        "capacity": 4
+      },
+      "6917529121679903879": {
+        "hash": 4097652774,
+        "stats": {
+          "mobility": 14,
+          "resilence": 6,
+          "recovery": 7,
+          "discipline": 8,
+          "intellect": 12,
+          "strength": 6
+        },
+        "defence": 925,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529119800676623": {
+        "hash": 3757338783,
+        "stats": {},
+        "defence": 920,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529126943643598": {
+        "hash": 2320100699,
+        "stats": {
+          "mobility": 9,
+          "resilence": 14,
+          "recovery": 7,
+          "discipline": 2,
+          "intellect": 7,
+          "strength": 19
+        },
+        "defence": 949,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529126954685303": {
+        "hash": 2320100699,
+        "stats": {
+          "mobility": 12,
+          "resilence": 10,
+          "recovery": 7,
+          "discipline": 20,
+          "intellect": 7,
+          "strength": 2
+        },
+        "defence": 949,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529126943650671": {
+        "hash": 4097652774,
+        "stats": {
+          "mobility": 7,
+          "resilence": 11,
+          "recovery": 6,
+          "discipline": 7,
+          "intellect": 6,
+          "strength": 10
+        },
+        "defence": 947,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529119441580668": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 2,
+          "resilence": 7,
+          "recovery": 28,
+          "discipline": 6,
+          "intellect": 8,
+          "strength": 14
+        },
+        "defence": 947,
+        "energy": "arc",
+        "capacity": 9
+      },
+      "6917529125345366755": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 7,
+          "resilence": 2,
+          "recovery": 17,
+          "discipline": 6,
+          "intellect": 16,
+          "strength": 2
+        },
+        "defence": 940,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529125364149591": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 2,
+          "resilence": 16,
+          "recovery": 7,
+          "discipline": 6,
+          "intellect": 12,
+          "strength": 9
+        },
+        "defence": 940,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529122371950001": {
+        "hash": 1257810769,
+        "stats": {
+          "mobility": 6,
+          "resilence": 17,
+          "recovery": 2,
+          "discipline": 12,
+          "intellect": 10,
+          "strength": 7
+        },
+        "defence": 926,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529122431909318": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 19,
+          "resilence": 6,
+          "recovery": 2,
+          "discipline": 7,
+          "intellect": 6,
+          "strength": 14
+        },
+        "defence": 930,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529123000329109": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 13,
+          "intellect": 15,
+          "strength": 2
+        },
+        "defence": 926,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529118874491231": {
+        "hash": 2193432605,
+        "stats": {
+          "mobility": 6,
+          "resilence": 8,
+          "recovery": 10,
+          "discipline": 16,
+          "intellect": 2,
+          "strength": 7
+        },
+        "defence": 920,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529119441574156": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 11,
+          "resilence": 6,
+          "recovery": 8,
+          "discipline": 8,
+          "intellect": 7,
+          "strength": 12
+        },
+        "defence": 915,
+        "energy": "solar",
+        "capacity": 4
+      },
+      "6917529115780128092": {
+        "hash": 2670393359,
+        "stats": {
+          "mobility": 17,
+          "resilence": 2,
+          "recovery": 8,
+          "discipline": 2,
+          "intellect": 10,
+          "strength": 21
+        },
+        "defence": 913,
+        "energy": "arc",
+        "capacity": 6
+      },
+      "6917529119579511722": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 6,
+          "resilence": 18,
+          "recovery": 2,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 923,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529119611988211": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 12,
+          "resilence": 8,
+          "recovery": 6,
+          "discipline": 14,
+          "intellect": 6,
+          "strength": 6
+        },
+        "defence": 916,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529119782950766": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 6,
+          "resilence": 11,
+          "recovery": 6,
+          "discipline": 16,
+          "intellect": 6,
+          "strength": 7
+        },
+        "defence": 916,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529118573228797": {
+        "hash": 3539357319,
+        "stats": {
+          "mobility": 12,
+          "resilence": 10,
+          "recovery": 17,
+          "discipline": 14,
+          "intellect": 6,
+          "strength": 8
+        },
+        "defence": 932,
+        "energy": "arc",
+        "capacity": 6
+      },
+      "6917529118556558803": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 17,
+          "resilence": 2,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 6,
+          "strength": 12
+        },
+        "defence": 913,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529116889223404": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 12,
+          "resilence": 6,
+          "recovery": 7,
+          "discipline": 19,
+          "intellect": 6,
+          "strength": 2
+        },
+        "defence": 914,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529119178138559": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 17,
+          "resilence": 7,
+          "recovery": 2,
+          "discipline": 12,
+          "intellect": 6,
+          "strength": 7
+        },
+        "defence": 914,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529118578577969": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 2,
+          "resilence": 19,
+          "recovery": 7,
+          "discipline": 2,
+          "intellect": 23,
+          "strength": 2
+        },
+        "defence": 915,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529119788456682": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 6,
+          "resilence": 12,
+          "recovery": 7,
+          "discipline": 10,
+          "intellect": 2,
+          "strength": 10
+        },
+        "defence": 921,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529126949574111": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 16,
+          "resilence": 2,
+          "recovery": 9,
+          "discipline": 8,
+          "intellect": 6,
+          "strength": 12
+        },
+        "defence": 950,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529105224813220": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 12,
+          "resilence": 8,
+          "recovery": 6,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 901,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529114358109996": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 13,
+          "resilence": 12,
+          "recovery": 2,
+          "discipline": 13,
+          "intellect": 6,
+          "strength": 6
+        },
+        "defence": 901,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529119178138149": {
+        "hash": 655964556,
+        "stats": {
+          "mobility": 12,
+          "resilence": 7,
+          "recovery": 6,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 919,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529117498396470": {
+        "hash": 639670612,
+        "stats": {
+          "mobility": 12,
+          "resilence": 2,
+          "recovery": 12,
+          "discipline": 10,
+          "intellect": 7,
+          "strength": 8
+        },
+        "defence": 914,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529119573933110": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 11,
+          "resilence": 2,
+          "recovery": 12,
+          "discipline": 18,
+          "intellect": 2,
+          "strength": 6
+        },
+        "defence": 917,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529119573934770": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 8,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 7,
+          "intellect": 2,
+          "strength": 18
+        },
+        "defence": 918,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529123457239739": {
+        "hash": 1257810769,
+        "stats": {
+          "mobility": 13,
+          "resilence": 12,
+          "recovery": 2,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 930,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529101788437367": {
+        "hash": 820446170,
+        "stats": {
+          "mobility": 2,
+          "resilence": 19,
+          "recovery": 6,
+          "discipline": 9,
+          "intellect": 17,
+          "strength": 2
+        },
+        "defence": 815,
+        "energy": "solar",
+        "capacity": 4
+      },
+      "6917529120274602280": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 7,
+          "resilence": 6,
+          "recovery": 22,
+          "discipline": 6,
+          "intellect": 2,
+          "strength": 18
+        },
+        "defence": 926,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529126791827525": {
+        "hash": 770140877,
+        "stats": {
+          "mobility": 7,
+          "resilence": 15,
+          "recovery": 7,
+          "discipline": 14,
+          "intellect": 13,
+          "strength": 2
+        },
+        "defence": 947,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529118539856067": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 12,
+          "resilence": 11,
+          "recovery": 2,
+          "discipline": 7,
+          "intellect": 2,
+          "strength": 29
+        },
+        "defence": 914,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529123636742518": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 12,
+          "resilence": 11,
+          "recovery": 2,
+          "discipline": 6,
+          "intellect": 17,
+          "strength": 2
+        },
+        "defence": 936,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529119813002057": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 2,
+          "resilence": 7,
+          "recovery": 18,
+          "discipline": 16,
+          "intellect": 8,
+          "strength": 2
+        },
+        "defence": 919,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529117568558623": {
+        "hash": 2151378428,
+        "stats": {
+          "mobility": 2,
+          "resilence": 6,
+          "recovery": 18,
+          "discipline": 14,
+          "intellect": 6,
+          "strength": 6
+        },
+        "defence": 910,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529115815890461": {
+        "hash": 3192738010,
+        "stats": {
+          "mobility": 7,
+          "resilence": 8,
+          "recovery": 14,
+          "discipline": 2,
+          "intellect": 13,
+          "strength": 14
+        },
+        "defence": 911,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529121896670193": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 924,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529124514630649": {
+        "hash": 2942269707,
+        "stats": {
+          "mobility": 14,
+          "resilence": 6,
+          "recovery": 6,
+          "discipline": 14,
+          "intellect": 2,
+          "strength": 11
+        },
+        "defence": 937,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529125357886932": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 20,
+          "resilence": 7,
+          "recovery": 2,
+          "discipline": 18,
+          "intellect": 6,
+          "strength": 2
+        },
+        "defence": 939,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529128190711721": {
+        "hash": 2148295091,
+        "stats": {
+          "mobility": 11,
+          "resilence": 7,
+          "recovery": 7,
+          "discipline": 2,
+          "intellect": 12,
+          "strength": 13
+        },
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529101788439700": {
+        "hash": 3375632008,
+        "stats": {
+          "mobility": 8,
+          "resilence": 16,
+          "recovery": 2,
+          "discipline": 2,
+          "intellect": 23,
+          "strength": 16
+        },
+        "defence": 924,
+        "energy": "arc",
+        "capacity": 8
+      },
+      "6917529128531910005": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 13,
+          "resilence": 10,
+          "recovery": 6,
+          "discipline": 12,
+          "intellect": 12,
+          "strength": 2
+        },
+        "defence": 950,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529119213625067": {
+        "hash": 1301696822,
+        "stats": {
+          "mobility": 7,
+          "resilence": 11,
+          "recovery": 7,
+          "discipline": 16,
+          "intellect": 6,
+          "strength": 2
+        },
+        "defence": 916,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529119741283516": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 6,
+          "resilence": 8,
+          "recovery": 17,
+          "discipline": 23,
+          "intellect": 2,
+          "strength": 2
+        },
+        "defence": 918,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529122990218672": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 13,
+          "resilence": 7,
+          "recovery": 7,
+          "discipline": 11,
+          "intellect": 2,
+          "strength": 11
+        },
+        "defence": 927,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529120222446520": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 7,
+          "resilence": 12,
+          "recovery": 11,
+          "discipline": 6,
+          "intellect": 13,
+          "strength": 8
+        },
+        "defence": 919,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529116965210987": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 911,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529115774529715": {
+        "hash": 875215126,
+        "stats": {},
+        "defence": 911,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529124509721566": {
+        "hash": 820446170,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 14,
+          "discipline": 11,
+          "intellect": 11,
+          "strength": 2
+        },
+        "defence": 936,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529128531910634": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 11,
+          "resilence": 12,
+          "recovery": 2,
+          "discipline": 13,
+          "intellect": 6,
+          "strength": 8
+        },
+        "defence": 948,
+        "energy": "arc",
+        "capacity": 4
+      },
+      "6917529122393983526": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 924,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529120216401080": {
+        "hash": 875215126,
+        "stats": {},
+        "defence": 928,
+        "energy": "void",
+        "capacity": 7
+      },
+      "6917529123051533909": {
+        "hash": 468899627,
+        "stats": {},
+        "defence": 933,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529123576876964": {
+        "hash": 191247558,
+        "stats": {
+          "mobility": 10,
+          "resilence": 2,
+          "recovery": 10,
+          "discipline": 6,
+          "intellect": 6,
+          "strength": 11
+        },
+        "defence": 930,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529123576881356": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 8,
+          "resilence": 11,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 14,
+          "strength": 6
+        },
+        "defence": 935,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529123063723607": {
+        "hash": 820446170,
+        "stats": {
+          "mobility": 2,
+          "resilence": 17,
+          "recovery": 8,
+          "discipline": 2,
+          "intellect": 14,
+          "strength": 11
+        },
+        "defence": 935,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529125801956204": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 6,
+          "resilence": 7,
+          "recovery": 12,
+          "discipline": 12,
+          "intellect": 7,
+          "strength": 7
+        },
+        "defence": 941,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529122410327748": {
+        "hash": 1301696822,
+        "stats": {
+          "mobility": 7,
+          "resilence": 2,
+          "recovery": 17,
+          "discipline": 11,
+          "intellect": 6,
+          "strength": 8
+        },
+        "defence": 927,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529123598786731": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 17,
+          "resilence": 2,
+          "recovery": 8,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 10
+        },
+        "defence": 932,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529118868740038": {
+        "hash": 1425077417,
+        "stats": {},
+        "defence": 915,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529119423584765": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 915,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529119590278423": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 918,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529119590273186": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 918,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529119617643080": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 917,
+        "energy": "solar",
+        "capacity": 4
+      },
+      "6917529119782943680": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 919,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529118874483909": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 918,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529126954685497": {
+        "hash": 770140877,
+        "stats": {
+          "mobility": 6,
+          "resilence": 20,
+          "recovery": 2,
+          "discipline": 20,
+          "intellect": 2,
+          "strength": 7
+        },
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529126954682648": {
+        "hash": 770140877,
+        "stats": {
+          "mobility": 2,
+          "resilence": 14,
+          "recovery": 15,
+          "discipline": 8,
+          "intellect": 6,
+          "strength": 13
+        },
+        "defence": 949,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529126949577922": {
+        "hash": 770140877,
+        "stats": {
+          "mobility": 13,
+          "resilence": 6,
+          "recovery": 8,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 14
+        },
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529126949581389": {
+        "hash": 770140877,
+        "stats": {
+          "mobility": 9,
+          "resilence": 10,
+          "recovery": 12,
+          "discipline": 12,
+          "intellect": 7,
+          "strength": 7
+        },
+        "defence": 949,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529100722873088": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 14,
+          "resilence": 6,
+          "recovery": 8,
+          "discipline": 2,
+          "intellect": 13,
+          "strength": 11
+        },
+        "defence": 750,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529123631962051": {
+        "hash": 1425077417,
+        "stats": {},
+        "defence": 937,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529124504116818": {
+        "hash": 1425077417,
+        "stats": {},
+        "defence": 936,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529128543662662": {
+        "hash": 1257810769,
+        "stats": {
+          "mobility": 7,
+          "resilence": 7,
+          "recovery": 10,
+          "discipline": 7,
+          "intellect": 13,
+          "strength": 6
+        },
+        "defence": 950,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529100718971824": {
+        "hash": 1510405477,
+        "stats": {
+          "mobility": 10,
+          "resilence": 2,
+          "recovery": 10,
+          "discipline": 6,
+          "intellect": 12,
+          "strength": 6
+        },
+        "defence": 750,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529100872126275": {
+        "hash": 2193432605,
+        "stats": {
+          "mobility": 7,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 10,
+          "intellect": 6,
+          "strength": 7
+        },
+        "defence": 780,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529100718971825": {
+        "hash": 2291082292,
+        "stats": {
+          "mobility": 10,
+          "resilence": 6,
+          "recovery": 6,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 750,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529101905968576": {
+        "hash": 2942269705,
+        "stats": {
+          "mobility": 8,
+          "resilence": 12,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 11,
+          "strength": 6
+        },
+        "defence": 840,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529101788433060": {
+        "hash": 2722966297,
+        "stats": {
+          "mobility": 6,
+          "resilence": 2,
+          "recovery": 20,
+          "discipline": 12,
+          "intellect": 9,
+          "strength": 6
+        },
+        "defence": 818,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529120251229440": {
+        "hash": 3825427923,
+        "stats": {
+          "mobility": 16,
+          "resilence": 2,
+          "recovery": 7,
+          "discipline": 2,
+          "intellect": 17,
+          "strength": 7
+        },
+        "defence": 920,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529120274604043": {
+        "hash": 3825427923,
+        "stats": {
+          "mobility": 13,
+          "resilence": 6,
+          "recovery": 8,
+          "discipline": 8,
+          "intellect": 10,
+          "strength": 10
+        },
+        "defence": 927,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529100711028037": {
+        "hash": 1288683596,
+        "stats": {
+          "mobility": 10,
+          "resilence": 2,
+          "recovery": 10,
+          "discipline": 12,
+          "intellect": 12,
+          "strength": 2
+        },
+        "defence": 750,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529128185606899": {
+        "hash": 639670612,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 14,
+          "discipline": 17,
+          "intellect": 2,
+          "strength": 7
+        },
+        "defence": 949,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529120227835610": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 2,
+          "resilence": 7,
+          "recovery": 17,
+          "discipline": 14,
+          "intellect": 2,
+          "strength": 11
+        },
+        "defence": 919,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529100718962764": {
+        "hash": 3192738011,
+        "stats": {
+          "mobility": 10,
+          "resilence": 7,
+          "recovery": 9,
+          "discipline": 8,
+          "intellect": 16,
+          "strength": 2
+        },
+        "defence": 750,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529100706137143": {
+        "hash": 2578820926,
+        "stats": {
+          "mobility": 10,
+          "resilence": 2,
+          "recovery": 10,
+          "discipline": 6,
+          "intellect": 2,
+          "strength": 16
+        },
+        "defence": 750,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529101788436016": {
+        "hash": 1320081419,
+        "stats": {
+          "mobility": 8,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 2,
+          "intellect": 17,
+          "strength": 7
+        },
+        "defence": 819,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529102823527326": {
+        "hash": 2151378428,
+        "stats": {
+          "mobility": 8,
+          "resilence": 2,
+          "recovery": 16,
+          "discipline": 2,
+          "intellect": 12,
+          "strength": 13
+        },
+        "defence": 876,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529102779403796": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 2,
+          "resilence": 19,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 6,
+          "strength": 12
+        },
+        "defence": 868,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529103641267178": {
+        "hash": 1537074069,
+        "stats": {
+          "mobility": 10,
+          "resilence": 2,
+          "recovery": 10,
+          "discipline": 22,
+          "intellect": 2,
+          "strength": 2
+        },
+        "defence": 900,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529103680862892": {
+        "hash": 2151378428,
+        "stats": {
+          "mobility": 2,
+          "resilence": 2,
+          "recovery": 23,
+          "discipline": 2,
+          "intellect": 8,
+          "strength": 16
+        },
+        "defence": 900,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529124532657013": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 939,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529128206230550": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 7,
+          "resilence": 2,
+          "recovery": 17,
+          "discipline": 17,
+          "intellect": 6,
+          "strength": 2
+        },
+        "defence": 950,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529124520723508": {
+        "hash": 875215126,
+        "stats": {},
+        "defence": 942,
+        "energy": "arc",
+        "capacity": 7
+      },
+      "6917529100715100252": {
+        "hash": 3987442049,
+        "stats": {},
+        "defence": 750,
+        "energy": "void",
+        "capacity": 5
+      },
+      "6917529101788434085": {
+        "hash": 1514841742,
+        "stats": {},
+        "defence": 818,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529102823522593": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 876,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529103659059148": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 901,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529103664908694": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 900,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529114764763584": {
+        "hash": 545134223,
+        "stats": {},
+        "defence": 904,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529126351047038": {
+        "hash": 468899627,
+        "stats": {},
+        "defence": 944,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529127362593693": {
+        "hash": 3539357319,
+        "stats": {
+          "mobility": 7,
+          "resilence": 14,
+          "recovery": 8,
+          "discipline": 6,
+          "intellect": 22,
+          "strength": 2
+        },
+        "defence": 950,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529120251229190": {
+        "hash": 1359908066,
+        "stats": {
+          "mobility": 7,
+          "resilence": 12,
+          "recovery": 7,
+          "discipline": 17,
+          "intellect": 11,
+          "strength": 2
+        },
+        "defence": 921,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529114364503785": {
+        "hash": 2151378428,
+        "stats": {
+          "mobility": 12,
+          "resilence": 2,
+          "recovery": 12,
+          "discipline": 11,
+          "intellect": 6,
+          "strength": 7
+        },
+        "defence": 900,
+        "energy": "arc",
+        "capacity": 4
+      },
+      "6917529102855634353": {
+        "hash": 925079356,
+        "stats": {
+          "mobility": 23,
+          "resilence": 2,
+          "recovery": 2,
+          "discipline": 6,
+          "intellect": 18,
+          "strength": 2
+        },
+        "defence": 860,
+        "energy": "arc",
+        "capacity": 3
+      },
+      "6917529121902445400": {
+        "hash": 1257810769,
+        "stats": {
+          "mobility": 13,
+          "resilence": 9,
+          "recovery": 8,
+          "discipline": 10,
+          "intellect": 10,
+          "strength": 2
+        },
+        "defence": 925,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529119788454120": {
+        "hash": 107232578,
+        "stats": {
+          "mobility": 8,
+          "resilence": 17,
+          "recovery": 2,
+          "discipline": 8,
+          "intellect": 7,
+          "strength": 20
+        },
+        "defence": 921,
+        "energy": "solar",
+        "capacity": 6
+      },
+      "6917529105383035650": {
+        "hash": 1301696822,
+        "stats": {
+          "mobility": 2,
+          "resilence": 7,
+          "recovery": 17,
+          "discipline": 8,
+          "intellect": 8,
+          "strength": 10
+        },
+        "defence": 900,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529100722879231": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 750,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529103594789814": {
+        "hash": 272413517,
+        "stats": {
+          "mobility": 11,
+          "resilence": 8,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 16,
+          "strength": 2
+        },
+        "defence": 860,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529114352415751": {
+        "hash": 2148295091,
+        "stats": {
+          "mobility": 6,
+          "resilence": 13,
+          "recovery": 7,
+          "discipline": 12,
+          "intellect": 12,
+          "strength": 2
+        },
+        "defence": 901,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529115398470465": {
+        "hash": 3691737472,
+        "stats": {
+          "mobility": 9,
+          "resilence": 11,
+          "recovery": 7,
+          "discipline": 14,
+          "intellect": 10,
+          "strength": 2
+        },
+        "defence": 905,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529115403489329": {
+        "hash": 2193432605,
+        "stats": {
+          "mobility": 13,
+          "resilence": 2,
+          "recovery": 12,
+          "discipline": 12,
+          "intellect": 2,
+          "strength": 12
+        },
+        "defence": 908,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529115403483868": {
+        "hash": 2903026872,
+        "stats": {
+          "mobility": 11,
+          "resilence": 8,
+          "recovery": 7,
+          "discipline": 6,
+          "intellect": 12,
+          "strength": 9
+        },
+        "defence": 909,
+        "energy": "solar",
+        "capacity": 5
+      },
+      "6917529115810295112": {
+        "hash": 2193432605,
+        "stats": {
+          "mobility": 12,
+          "resilence": 12,
+          "recovery": 2,
+          "discipline": 8,
+          "intellect": 12,
+          "strength": 7
+        },
+        "defence": 910,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529116946847558": {
+        "hash": 2148295091,
+        "stats": {
+          "mobility": 6,
+          "resilence": 7,
+          "recovery": 12,
+          "discipline": 11,
+          "intellect": 6,
+          "strength": 6
+        },
+        "defence": 910,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529121667567267": {
+        "hash": 2151378428,
+        "stats": {
+          "mobility": 2,
+          "resilence": 10,
+          "recovery": 10,
+          "discipline": 6,
+          "intellect": 12,
+          "strength": 8
+        },
+        "defence": 923,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529115393438561": {
+        "hash": 2942269705,
+        "stats": {
+          "mobility": 2,
+          "resilence": 6,
+          "recovery": 20,
+          "discipline": 17,
+          "intellect": 2,
+          "strength": 7
+        },
+        "defence": 902,
+        "energy": "arc",
+        "capacity": 2
+      },
+      "6917529121673558532": {
+        "hash": 2568538788,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 11,
+          "intellect": 6,
+          "strength": 9
+        },
+        "defence": 926,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529115419441865": {
+        "hash": 2942269704,
+        "stats": {
+          "mobility": 6,
+          "resilence": 18,
+          "recovery": 6,
+          "discipline": 7,
+          "intellect": 13,
+          "strength": 17
+        },
+        "defence": 906,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529115576247074": {
+        "hash": 530558102,
+        "stats": {
+          "mobility": 23,
+          "resilence": 2,
+          "recovery": 2,
+          "discipline": 9,
+          "intellect": 8,
+          "strength": 10
+        },
+        "defence": 912,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529119579509053": {
+        "hash": 639670612,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 14,
+          "intellect": 2,
+          "strength": 11
+        },
+        "defence": 921,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529114370651243": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 19,
+          "resilence": 6,
+          "recovery": 2,
+          "discipline": 6,
+          "intellect": 2,
+          "strength": 16
+        },
+        "defence": 901,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529114775854910": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 13,
+          "resilence": 6,
+          "recovery": 7,
+          "discipline": 7,
+          "intellect": 6,
+          "strength": 13
+        },
+        "defence": 902,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529115403490400": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 6,
+          "resilence": 18,
+          "recovery": 2,
+          "discipline": 8,
+          "intellect": 11,
+          "strength": 6
+        },
+        "defence": 903,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529102850634961": {
+        "hash": 2568538788,
+        "stats": {
+          "mobility": 12,
+          "resilence": 7,
+          "recovery": 7,
+          "discipline": 2,
+          "intellect": 12,
+          "strength": 13
+        },
+        "defence": 907,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529115419440135": {
+        "hash": 639670612,
+        "stats": {
+          "mobility": 17,
+          "resilence": 9,
+          "recovery": 2,
+          "discipline": 10,
+          "intellect": 11,
+          "strength": 2
+        },
+        "defence": 907,
+        "energy": "solar",
+        "capacity": 4
+      },
+      "6917529115463074984": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 6,
+          "resilence": 6,
+          "recovery": 12,
+          "discipline": 2,
+          "intellect": 2,
+          "strength": 23
+        },
+        "defence": 911,
+        "energy": "solar",
+        "capacity": 3
+      },
+      "6917529120274611544": {
+        "hash": 3988753671,
+        "stats": {
+          "mobility": 18,
+          "resilence": 9,
+          "recovery": 2,
+          "discipline": 7,
+          "intellect": 12,
+          "strength": 6
+        },
+        "defence": 924,
+        "energy": "void",
+        "capacity": 4
+      },
+      "6917529115810293964": {
+        "hash": 4097652774,
+        "stats": {
+          "mobility": 6,
+          "resilence": 8,
+          "recovery": 14,
+          "discipline": 6,
+          "intellect": 2,
+          "strength": 19
+        },
+        "defence": 910,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529115398463262": {
+        "hash": 2468603407,
+        "stats": {
+          "mobility": 2,
+          "resilence": 16,
+          "recovery": 8,
+          "discipline": 11,
+          "intellect": 11,
+          "strength": 2
+        },
+        "defence": 911,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529114383194787": {
+        "hash": 3192738011,
+        "stats": {
+          "mobility": 9,
+          "resilence": 2,
+          "recovery": 16,
+          "discipline": 13,
+          "intellect": 11,
+          "strength": 2
+        },
+        "defence": 903,
+        "energy": "solar",
+        "capacity": 4
+      },
+      "6917529114736068360": {
+        "hash": 1301696822,
+        "stats": {
+          "mobility": 2,
+          "resilence": 18,
+          "recovery": 6,
+          "discipline": 12,
+          "intellect": 6,
+          "strength": 8
+        },
+        "defence": 904,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529101905964942": {
+        "hash": 310888006,
+        "stats": {
+          "mobility": 12,
+          "resilence": 6,
+          "recovery": 6,
+          "discipline": 8,
+          "intellect": 12,
+          "strength": 6
+        },
+        "defence": 905,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529115451787625": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 11,
+          "resilence": 6,
+          "recovery": 6,
+          "discipline": 7,
+          "intellect": 7,
+          "strength": 12
+        },
+        "defence": 905,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529115570063811": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 11,
+          "resilence": 6,
+          "recovery": 7,
+          "discipline": 6,
+          "intellect": 6,
+          "strength": 11
+        },
+        "defence": 906,
+        "energy": "arc",
+        "capacity": 1
+      },
+      "6917529114781814640": {
+        "hash": 3192738011,
+        "stats": {
+          "mobility": 2,
+          "resilence": 13,
+          "recovery": 12,
+          "discipline": 6,
+          "intellect": 11,
+          "strength": 7
+        },
+        "defence": 905,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529115821398971": {
+        "hash": 310888006,
+        "stats": {
+          "mobility": 8,
+          "resilence": 2,
+          "recovery": 16,
+          "discipline": 22,
+          "intellect": 2,
+          "strength": 2
+        },
+        "defence": 908,
+        "energy": "solar",
+        "capacity": 2
+      },
+      "6917529117485787997": {
+        "hash": 1088960547,
+        "stats": {
+          "mobility": 17,
+          "resilence": 2,
+          "recovery": 8,
+          "discipline": 7,
+          "intellect": 12,
+          "strength": 6
+        },
+        "defence": 908,
+        "energy": "void",
+        "capacity": 2
+      },
+      "6917529100840206233": {
+        "hash": 3312368889,
+        "stats": {},
+        "defence": 813,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529114582190015": {
+        "hash": 3312368889,
+        "stats": {},
+        "defence": 904,
+        "energy": "void",
+        "capacity": 3
+      },
+      "6917529115419433295": {
+        "hash": 875215126,
+        "stats": {},
+        "defence": 906,
+        "energy": "solar",
+        "capacity": 1
+      },
+      "6917529115451788271": {
+        "hash": 1425077417,
+        "stats": {},
+        "defence": 906,
+        "energy": "void",
+        "capacity": 1
+      },
+      "6917529115451783536": {
+        "hash": 875215126,
+        "stats": {},
+        "defence": 905,
+        "energy": "arc",
+        "capacity": 5
+      },
+      "6917529115445687636": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 907,
+        "energy": "arc",
+        "capacity": 4
+      },
+      "6917529114775861671": {
+        "hash": 3757338782,
+        "stats": {},
+        "defence": 904,
+        "energy": "arc",
+        "capacity": 2
+      }
+    },
+    "displayProperties": {
+      "defence": {
+        "name": "Defense",
+        "description": "Reduces incoming damage from your enemies.",
+        "hasIcon": false
+      },
+      "items": {
+        "3691737472": {
+          "name": "Prodigal Helm",
+          "icon": "/common/destiny2_content/icons/5009454ca6fc1811aff3c39399e35a23.jpg",
+          "description": "\"There's a new player over on the Shore. He calls himself 'Crow.' As if trying to rub our prince's death in our faces.\" \u2014Report from Paladin Hallam Fen",
+          "hasIcon": true
+        },
+        "3987442049": {
+          "name": "Solstice Mark (Majestic)",
+          "icon": "/common/destiny2_content/icons/4ffab9ec989f08faa108fab1414e4318.jpg",
+          "hasIcon": true
+        },
+        "3539357319": {
+          "name": "Peacekeepers",
+          "icon": "/common/destiny2_content/icons/592dc38dd7a785ad28e83236559fc6ea.jpg",
+          "description": "Designed for the seamless delivery of justice in an unjust world.",
+          "hasIcon": true
+        },
+        "1234228360": {
+          "name": "Iron Will Mark",
+          "icon": "/common/destiny2_content/icons/0d4e4db63f2f2f4d0c46bfe43ec0a469.jpg",
+          "description": "\"Thy duty is thy bond. Protect the defenseless. Conquer all fear.\" \u2014A tenet of the Iron Will",
+          "hasIcon": true
+        },
+        "3988753671": {
+          "name": "Prodigal Cuirass",
+          "icon": "/common/destiny2_content/icons/ee998970271edd43cd57d7bc074c9384.jpg",
+          "description": "\"Petra Venj, I formally request that you take the Queenship.\" \u2014Paladin Leona Bryl",
+          "hasIcon": true
+        },
+        "3375632008": {
+          "name": "The Shelter in Place",
+          "icon": "/common/destiny2_content/icons/30f9c387a481d015176083a46e7d1275.jpg",
+          "description": "\"Where is your home? That is where you will fight the hardest.\" \u2014Zavala",
+          "hasIcon": true
+        },
+        "2942269707": {
+          "name": "Substitutional Alloy Gauntlets",
+          "icon": "/common/destiny2_content/icons/e9f1b19e455fb73820e527c2bcfc3bcb.jpg",
+          "description": "We shall rise before we die, and die before we have risen.",
+          "hasIcon": true
+        },
+        "655964556": {
+          "name": "Mimetic Savior Gauntlets",
+          "icon": "/common/destiny2_content/icons/6445843c8d3ecef58f0e9ed96ef678db.jpg",
+          "description": "\"They don't know about the Vex. They don't know they're being watched.\" \u2014Isidel Brandor, to her Ghost",
+          "hasIcon": true
+        },
+        "2942269705": {
+          "name": "Substitutional Alloy Gauntlets",
+          "icon": "/common/destiny2_content/icons/e9f1b19e455fb73820e527c2bcfc3bcb.jpg",
+          "description": "We shall rise before we die, and die before we have risen.",
+          "hasIcon": true
+        },
+        "2468603406": {
+          "name": "Substitutional Alloy Plate",
+          "icon": "/common/destiny2_content/icons/8dc16c650e8bc5cf468843613d1fc375.jpg",
+          "description": "For our salvation, the universe shall be remade.",
+          "hasIcon": true
+        },
+        "2670393359": {
+          "name": "Phoenix Strife Type 0",
+          "icon": "/common/destiny2_content/icons/9135c4d5d5b49aa479080cfd4bca206f.jpg",
+          "description": "\"The greatest compliment you can pay in the Crucible is to fight with everything you've got.\" \u2014Lord Shaxx",
+          "hasIcon": true
+        },
+        "2468603407": {
+          "name": "Substitutional Alloy Plate",
+          "icon": "/common/destiny2_content/icons/8dc16c650e8bc5cf468843613d1fc375.jpg",
+          "description": "For our salvation, the universe shall be remade.",
+          "hasIcon": true
+        },
+        "545134223": {
+          "name": "Tangled Web Mark",
+          "icon": "/common/destiny2_content/icons/33f6071983a0d5d83e64905adf44ee67.jpg",
+          "description": "\"In my company, the Ether flows.\" \u2014The Spider",
+          "hasIcon": true
+        },
+        "1320081419": {
+          "name": "The Shelter in Place",
+          "icon": "/common/destiny2_content/icons/f4909fa738e38fcc0bc2653573ae1f43.jpg",
+          "description": "\"That each of us have many lives to give for the City is the Traveler's greatest gift.\" \u2014Zavala",
+          "hasIcon": true
+        },
+        "1514841742": {
+          "name": "Mark of Shelter",
+          "icon": "/common/destiny2_content/icons/be885c0fa19e10de1edda735adc973b8.jpg",
+          "description": "Titans are both the shelter and the storm.",
+          "hasIcon": true
+        },
+        "1537074069": {
+          "name": "Phoenix Cradle",
+          "icon": "/common/destiny2_content/icons/1d45c4450eaa79c7f79b2e99f0bd1376.jpg",
+          "description": "For some, a nest. For the rest, a crucible.",
+          "hasIcon": true
+        },
+        "530558102": {
+          "name": "Phoenix Strife Type 0",
+          "icon": "/common/destiny2_content/icons/c8e29fa09c7a1c0e9fae2fbe756ed63c.jpg",
+          "description": "\"Mercy has no place in the Crucible. Going easy does no one any favors.\" \u2014Lord Shaxx",
+          "hasIcon": true
+        },
+        "875215126": {
+          "name": "Prodigal Mark",
+          "icon": "/common/destiny2_content/icons/8484b03ef4f91fd8c657377949e7d2e2.jpg",
+          "description": "\"It's from 'Paladin Oran.' 'Use less data, route electron notices forward over Uranus-Neptune divide.\" \u2014Paladin Hallam Fen",
+          "hasIcon": true
+        },
+        "2722966297": {
+          "name": "The Shelter in Place",
+          "icon": "/common/destiny2_content/icons/201720bfdb0712c00740c197ee1e953b.jpg",
+          "description": "Some armor doesn't protect you so much as it just makes the dying slower.",
+          "hasIcon": true
+        },
+        "2193432605": {
+          "name": "Mimetic Savior Helm",
+          "icon": "/common/destiny2_content/icons/5f13cd2412ecbb0b7833843e1e31e590.jpg",
+          "description": "She found them in Juno Chasma. A base\u2014no, an exhibit. The humans didn't know they were in cages.",
+          "hasIcon": true
+        },
+        "3757338782": {
+          "name": "Substitutional Alloy Mark",
+          "icon": "/common/destiny2_content/icons/c05c487b23b1c8ac93e2f44c00226278.jpg",
+          "description": "And the cleanse shall beget an ocean.",
+          "hasIcon": true
+        },
+        "3757338783": {
+          "name": "Substitutional Alloy Mark",
+          "icon": "/common/destiny2_content/icons/c05c487b23b1c8ac93e2f44c00226278.jpg",
+          "description": "And the cleanse shall beget an ocean.",
+          "hasIcon": true
+        },
+        "1088960547": {
+          "name": "Prodigal Greaves",
+          "icon": "/common/destiny2_content/icons/34f2146bc2a64986608aba2d554d5608.jpg",
+          "description": "\"Regent-Commander Petra Venj, if you take the Queenship, I will take my fleet and leave.\" \u2014Paladin Kamala Rior",
+          "hasIcon": true
+        },
+        "2568538788": {
+          "name": "Dreambane Plate",
+          "icon": "/common/destiny2_content/icons/4ee9cf819d6ce63e138b77ced6503826.jpg",
+          "description": "\"The mind might quail, so your heart must prevail.\" \u2014Eris Morn",
+          "hasIcon": true
+        },
+        "4097652774": {
+          "name": "Tangled Web Plate",
+          "icon": "/common/destiny2_content/icons/13daf5f4448a4b7342231e9ed1b1bf76.jpg",
+          "description": "\"Let them have the Great Machine. They deserve it.\" \u2014Mithrax, transl. from Eliksni",
+          "hasIcon": true
+        },
+        "1425077417": {
+          "name": "Mimetic Savior Bond",
+          "icon": "/common/destiny2_content/icons/524b7364b880569ea5574cb87cbb63f6.jpg",
+          "description": "Then she remembered. The fireteam. The gate. The desperate plan. \"Tuyet! Pull me out!\" No response.",
+          "hasIcon": true
+        },
+        "468899627": {
+          "name": "Binary Phoenix Mark",
+          "icon": "/common/destiny2_content/icons/139b4fd1aa0231c771fdf3333ce9e8ce.jpg",
+          "description": "The phoenix that fights itself, then rises from its ashes stronger than ever. That is the Crucible.",
+          "hasIcon": true
+        },
+        "2148295091": {
+          "name": "Tangled Web Helm",
+          "icon": "/common/destiny2_content/icons/af1e89c557722f989b9bfb5ae1ad693b.jpg",
+          "description": "\"I was at the Final Attempt. I saw a Guardian wield a gun that left molten gold in her wake. I ran and never looked back.\" \u2014Avrok, transl. from Eliksni",
+          "hasIcon": true
+        },
+        "2291082292": {
+          "name": "Solstice Gauntlets (Majestic)",
+          "icon": "/common/destiny2_content/icons/cfc9c4877955741530084545a50ff3a1.jpg",
+          "hasIcon": true
+        },
+        "1301696822": {
+          "name": "Mimetic Savior Greaves",
+          "icon": "/common/destiny2_content/icons/30eb00a296fb35aafd8406b24f0992ee.jpg",
+          "description": "Isidel hoisted herself back up over the chasma edge, turned to help the man behind her. But he was gone. Everyone was gone. The chasma was empty.",
+          "hasIcon": true
+        },
+        "2903026872": {
+          "name": "Substitutional Alloy Helm",
+          "icon": "/common/destiny2_content/icons/a3dc609804bfe49f87f32179e7fc6519.jpg",
+          "description": "Time is an ocean, vast without shore.",
+          "hasIcon": true
+        },
+        "2903026873": {
+          "name": "Substitutional Alloy Helm",
+          "icon": "/common/destiny2_content/icons/a3dc609804bfe49f87f32179e7fc6519.jpg",
+          "description": "Time is an ocean, vast without shore.",
+          "hasIcon": true
+        },
+        "925079356": {
+          "name": "Dreambane Gauntlets",
+          "icon": "/common/destiny2_content/icons/687ebd26eab04203bf86720f1c9c4009.jpg",
+          "description": "\"Their curses are now your charms. Hold such hatreds close, for they reveal their fears.\" \u2014Eris Morn",
+          "hasIcon": true
+        },
+        "2578820926": {
+          "name": "Solstice Greaves (Majestic)",
+          "icon": "/common/destiny2_content/icons/4f926ca7043845293cc8e06b2e918460.jpg",
+          "hasIcon": true
+        },
+        "107232578": {
+          "name": "Tangled Web Gauntlets",
+          "icon": "/common/destiny2_content/icons/8ea14f623e5d3872db6e86c403e76cd2.jpg",
+          "description": "\"The Kells are dead or mad. The era of Houses is over. So I came to the Shore.\" \u2014Arrha, transl. from Eliksni",
+          "hasIcon": true
+        },
+        "191247558": {
+          "name": "Ancient Apocalypse Plate",
+          "icon": "/common/destiny2_content/icons/00ba630320699e09e5287fd420384d6e.jpg",
+          "description": "\"Sometimes it's a cosmic event. Sometimes it's a beast from hell. Sometimes it's one man.\" \u2014The Drifter",
+          "hasIcon": true
+        },
+        "310888006": {
+          "name": "Dreambane Greaves",
+          "icon": "/common/destiny2_content/icons/6b790c26aa3d384dd54607f94e4554ba.jpg",
+          "description": "\"You will go where none have gone before. Tread carefully.\" \u2014Eris Morn",
+          "hasIcon": true
+        },
+        "1288683596": {
+          "name": "Solstice Plate (Majestic)",
+          "icon": "/common/destiny2_content/icons/87d4b0606fae442132af0deb4aa0e5d9.jpg",
+          "hasIcon": true
+        },
+        "770140877": {
+          "name": "Iron Will Greaves",
+          "icon": "/common/destiny2_content/icons/266de53275bb2a90d2ab9c7acdb7606e.jpg",
+          "description": "\"Thy duty is thy bond. Protect the defenseless. Conquer all fear.\" \u2014A tenet of the Iron Will",
+          "hasIcon": true
+        },
+        "272413517": {
+          "name": "Dreambane Helm",
+          "icon": "/common/destiny2_content/icons/e316d685c2e3ca3b46f8363544b400d0.jpg",
+          "description": "\"And lastly, a shroud of dreams, so that you might see these nightmares with open eyes.\" \u2014Eris Morn",
+          "hasIcon": true
+        },
+        "1257810769": {
+          "name": "Prodigal Gauntlets",
+          "icon": "/common/destiny2_content/icons/1acc3531de893da8cd1ee931e073d43c.jpg",
+          "description": "\"The Reef grieves for Uldren Sov, lost in the Taken War. He will be remembered as a voice for peace.\" \u2014Paladin Devi Cassl",
+          "hasIcon": true
+        },
+        "3825427923": {
+          "name": "Ancient Apocalypse Helm",
+          "icon": "/common/destiny2_content/icons/f01f13d34cdd246a233dbcb5418be7e2.jpg",
+          "description": "\"Maybe you leave your first apocalypse. But your second one never leaves you.\" \u2014The Drifter",
+          "hasIcon": true
+        },
+        "639670612": {
+          "name": "Mimetic Savior Plate",
+          "icon": "/common/destiny2_content/icons/41a81971af44733bb080cb48f03debee.jpg",
+          "description": "\"I'm here to save you.\" \u2014Isidel Brandor\n\"Imitate! Observe! Comprehend!\" \u2014Unnamed inhabitant(s), Juno Chasma",
+          "hasIcon": true
+        },
+        "820446170": {
+          "name": "Phoenix Strife Type 0",
+          "icon": "/common/destiny2_content/icons/1c0302dc8457bf80035bdd947a7a0bc3.jpg",
+          "description": "Never stop striving.",
+          "hasIcon": true
+        },
+        "2320100699": {
+          "name": "Iron Will Gauntlets",
+          "icon": "/common/destiny2_content/icons/a5fd85607af3c405ad2bb9fc792d33da.jpg",
+          "description": "\"Thy duty is thy bond. Protect the defenseless. Conquer all fear.\" \u2014A tenet of the Iron Will",
+          "hasIcon": true
+        },
+        "3192738010": {
+          "name": "Substitutional Alloy Greaves",
+          "icon": "/common/destiny2_content/icons/3bf9dbb014d3aade6a953d18da827fe7.jpg",
+          "description": "Remade until the disease has been cleansed.",
+          "hasIcon": true
+        },
+        "3192738011": {
+          "name": "Substitutional Alloy Greaves",
+          "icon": "/common/destiny2_content/icons/3bf9dbb014d3aade6a953d18da827fe7.jpg",
+          "description": "Remade until the disease has been cleansed.",
+          "hasIcon": true
+        },
+        "1359908066": {
+          "name": "Ancient Apocalypse Gauntlets",
+          "icon": "/common/destiny2_content/icons/c9318cf440622f8d1474514105435001.jpg",
+          "description": "\"Sometimes the difference between survival and eradication is just pure, simple stubbornness.\" \u2014The Drifter",
+          "hasIcon": true
+        },
+        "1510405477": {
+          "name": "Solstice Helm (Majestic)",
+          "icon": "/common/destiny2_content/icons/30e9c8ee3544fe7a529b1cdbbb35083b.jpg",
+          "hasIcon": true
+        },
+        "2942269704": {
+          "name": "Substitutional Alloy Gauntlets",
+          "icon": "/common/destiny2_content/icons/e9f1b19e455fb73820e527c2bcfc3bcb.jpg",
+          "description": "We shall rise before we die, and die before we have risen.",
+          "hasIcon": true
+        },
+        "1895324274": {
+          "name": "Iron Will Helm",
+          "icon": "/common/destiny2_content/icons/ebc79f5990c8a993b743ca5932ec9762.jpg",
+          "description": "\"Thy duty is thy bond. Protect the defenseless. Conquer all fear.\" \u2014A tenet of the Iron Will",
+          "hasIcon": true
+        },
+        "3312368889": {
+          "name": "Dreambane Mark",
+          "icon": "/common/destiny2_content/icons/f9c8eaefc8d2531b8b32cd9a44f7cbc8.jpg",
+          "description": "\"This relic of ancient trauma is bound by Hive magic, like a new bandage on an old scar.\" \u2014Eris Morn",
+          "hasIcon": true
+        },
+        "2151378428": {
+          "name": "Tangled Web Greaves",
+          "icon": "/common/destiny2_content/icons/6343ded92f4483761df99af5e2817295.jpg",
+          "description": "\"I was of kings. Then of exiles. Now I'm here. The Shore is bad\u2026 but everywhere else is worse.\" \u2014Brivi, transl. from Eliksni",
+          "hasIcon": true
+        }
+      },
+      "stats": {
+        "mobility": {
+          "name": "Mobility",
+          "icon": "/common/destiny2_content/icons/c9aa8439fc71c9ee336ba713535569ad.png",
+          "description": "Increases your movement speed and maximum jump height.",
+          "hasIcon": true
+        },
+        "resilence": {
+          "name": "Resilience",
+          "icon": "/common/destiny2_content/icons/9f5f65d08b24defb660cebdfd7bae727.png",
+          "description": "Increases the amount of damage you can take before dying.",
+          "hasIcon": true
+        },
+        "recovery": {
+          "name": "Recovery",
+          "icon": "/common/destiny2_content/icons/47e16a27c8387243dcf9b5d94e26ccc4.png",
+          "description": "Increases the speed at which you regain lost health.",
+          "hasIcon": true
+        },
+        "discipline": {
+          "name": "Discipline",
+          "icon": "/common/destiny2_content/icons/ca62128071dc254fe75891211b98b237.png",
+          "description": "Discipline decreases the cooldown time of your grenades, allowing you to use them more often.",
+          "hasIcon": true
+        },
+        "intellect": {
+          "name": "Intellect",
+          "icon": "/common/destiny2_content/icons/59732534ce7060dba681d1ba84c055a6.png",
+          "description": "Intellect decreases the cooldown of your Super ability, allowing you to use it more often.",
+          "hasIcon": true
+        },
+        "strength": {
+          "name": "Strength",
+          "icon": "/common/destiny2_content/icons/c7eefc8abbaa586eeab79e962a79d6ad.png",
+          "description": "Strength decreases the cooldown time of your melee ability, allowing you to use it more often.",
+          "hasIcon": true
+        }
+      },
+      "class": {
+        "titan": {
+          "name": "Titan",
+          "description": "Titan class helmets, chest, arms and legs",
+          "hasIcon": false
+        }
+      },
+      "slots": {
+        "helmet": {
+          "name": "Helmets",
+          "hasIcon": false
+        },
+        "arms": {
+          "name": "Arms",
+          "hasIcon": false
+        },
+        "chest": {
+          "name": "Chest",
+          "hasIcon": false
+        },
+        "legs": {
+          "name": "Legs",
+          "hasIcon": false
+        },
+        "class": {
+          "name": "Class Items",
+          "hasIcon": false
+        }
+      },
+      "energy": {
+        "arc": {
+          "name": "Arc",
+          "icon": "/common/destiny2_content/icons/DestinyEnergyTypeDefinition_9fbcfcef99f4e8a40d8762ccb556fcd4.png",
+          "description": "Requires Arc energy.",
+          "hasIcon": true
+        },
+        "solar": {
+          "name": "Solar",
+          "icon": "/common/destiny2_content/icons/DestinyEnergyTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
+          "description": "Requires Solar energy.",
+          "hasIcon": true
+        },
+        "void": {
+          "name": "Void",
+          "icon": "/common/destiny2_content/icons/DestinyEnergyTypeDefinition_ceb2f6197dccf3958bb31cc783eb97a0.png",
+          "description": "Requires Void energy.",
+          "hasIcon": true
+        }
+      }
+    },
+    "class": {
+      "3691737472": "titan",
+      "3987442049": "titan",
+      "3539357319": "titan",
+      "1234228360": "titan",
+      "3988753671": "titan",
+      "3375632008": "titan",
+      "2942269707": "titan",
+      "655964556": "titan",
+      "2942269705": "titan",
+      "2468603406": "titan",
+      "2670393359": "titan",
+      "2468603407": "titan",
+      "545134223": "titan",
+      "1320081419": "titan",
+      "1514841742": "titan",
+      "1537074069": "titan",
+      "530558102": "titan",
+      "875215126": "titan",
+      "2722966297": "titan",
+      "2193432605": "titan",
+      "3757338782": "titan",
+      "3757338783": "titan",
+      "1088960547": "titan",
+      "2568538788": "titan",
+      "4097652774": "titan",
+      "1425077417": "titan",
+      "468899627": "titan",
+      "2148295091": "titan",
+      "2291082292": "titan",
+      "1301696822": "titan",
+      "2903026872": "titan",
+      "2903026873": "titan",
+      "925079356": "titan",
+      "2578820926": "titan",
+      "107232578": "titan",
+      "191247558": "titan",
+      "310888006": "titan",
+      "1288683596": "titan",
+      "770140877": "titan",
+      "272413517": "titan",
+      "1257810769": "titan",
+      "3825427923": "titan",
+      "639670612": "titan",
+      "820446170": "titan",
+      "2320100699": "titan",
+      "3192738010": "titan",
+      "3192738011": "titan",
+      "1359908066": "titan",
+      "1510405477": "titan",
+      "2942269704": "titan",
+      "1895324274": "titan",
+      "3312368889": "titan",
+      "2151378428": "titan"
+    },
+    "slot": {
+      "3691737472": "helmet",
+      "3987442049": "class",
+      "3539357319": "legs",
+      "1234228360": "class",
+      "3988753671": "chest",
+      "3375632008": "helmet",
+      "2942269707": "arms",
+      "655964556": "arms",
+      "2942269705": "arms",
+      "2468603406": "chest",
+      "2670393359": "helmet",
+      "2468603407": "chest",
+      "545134223": "class",
+      "1320081419": "legs",
+      "1514841742": "class",
+      "1537074069": "legs",
+      "530558102": "arms",
+      "875215126": "class",
+      "2722966297": "arms",
+      "2193432605": "helmet",
+      "3757338782": "class",
+      "3757338783": "class",
+      "1088960547": "legs",
+      "2568538788": "chest",
+      "4097652774": "chest",
+      "1425077417": "class",
+      "468899627": "class",
+      "2148295091": "helmet",
+      "2291082292": "arms",
+      "1301696822": "legs",
+      "2903026872": "helmet",
+      "2903026873": "helmet",
+      "925079356": "arms",
+      "2578820926": "legs",
+      "107232578": "arms",
+      "191247558": "chest",
+      "310888006": "legs",
+      "1288683596": "chest",
+      "770140877": "legs",
+      "272413517": "helmet",
+      "1257810769": "arms",
+      "3825427923": "helmet",
+      "639670612": "chest",
+      "820446170": "chest",
+      "2320100699": "arms",
+      "3192738010": "legs",
+      "3192738011": "legs",
+      "1359908066": "arms",
+      "1510405477": "helmet",
+      "2942269704": "arms",
+      "1895324274": "helmet",
+      "3312368889": "class",
+      "2151378428": "legs"
+    }
+  }

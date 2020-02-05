@@ -1,0 +1,689 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>My warmind</title>
+    <meta name="description" content="My warmind">
+    <meta name="author" content="Rasputin">
+</head>
+
+<body>
+    <style>
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: left;
+            padding: 5px 0;
+            border-radius: 6px;
+            position: absolute;
+            bottom: 100%;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip.selected .tooltiptext {
+            visibility: visible;
+        }
+    </style>
+
+    <style>
+        .grid {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            grid-auto-rows: 60px;
+        }
+
+        .char {
+            border-radius: 1px;
+            max-width: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .trash {
+            outline: solid red
+        }
+
+        .better {
+            outline: solid limegreen
+        }
+
+    </style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function* cartesianProduct(...axis) {
+            if (axis.length == 0) {
+                yield []
+                return
+            }
+
+            let tail = axis.pop()
+
+            for (let h of cartesianProduct(...axis)) {
+                for (let t of tail) {
+                    yield [...h, t]
+                }
+            }
+        }
+
+        function plus(a, b) {
+            return a + b
+        }
+
+        function* evolve(array, amount) {
+            if (amount == 0) yield array.join(" ")
+            else for (let i in array) {
+                let next = [...array]
+                next[i] = Math.min(10, next[i] + 1)
+                yield* evolve(next, amount - 1)
+            }
+        }
+    </script>
+    <script>
+        // Should detect if item is lesser than other
+        // singleLoss parameter indicate how much stronger it can be than other to be considered a loss.
+        // totalLoss parameter indicate how much greatness overall it can have and still be a loss
+        function itemIsLooser(item, other, singleLoss, totalLoss) {
+
+            /// Diff each individual components
+            let diff = item.map((value, index) => {
+                return value - other[index]
+            })
+
+            let greatnessFactors = diff.filter(d => d > 0) // all diffs that item is better than other
+            let loosernessFactors = diff.filter(d => d < 0).map(a => -a) // all diffs taht item is worse than other
+
+            let totalGreatnessFactor = greatnessFactors.reduce(plus, 0)
+            let totalLoosernessFactor = loosernessFactors.reduce(plus, 0)
+
+            // if sum of looserness is larges than sum of greatness - this items is worse overall
+            let isWorse = totalLoosernessFactor >= totalGreatnessFactor
+
+            // if item is great just a little it is still a loss
+            let hasFineTotalGreatness = totalGreatnessFactor <= totalLoss
+
+            let maxGreatness = Math.max(0, ...greatnessFactors)
+
+            let hasFineSingleGreatness = maxGreatness <= singleLoss
+
+            return isWorse && hasFineTotalGreatness && hasFineSingleGreatness
+        }
+
+        console.log(itemIsLooser([10, 10], [12, 10], 0, 0)) // true - it is strict loss
+        console.log(itemIsLooser([12, 10], [10, 10], 0, 0)) // false - it is strict win
+        console.log(itemIsLooser([12, 10], [10, 12], 0, 0)) // false - it is equal
+        console.log(itemIsLooser([12, 10], [10, 13], 0, 0)) // false - it is great in some dimensions
+        console.log(itemIsLooser([11, 11], [12, 10], 1, 1)) // true - it is great in one direction but we will allow it
+
+        function groupByClusters(items, condition) {
+            let clusters = new Map()
+            let itemsToProcess = new Set(items)
+
+            for (let item of itemsToProcess) {
+                itemsToProcess.delete(item)
+                let itemCluster = []
+                for (let other of itemsToProcess) {
+                    if (condition(item, other)) {
+                        itemCluster.push(other)
+                        //itemsToProcess.delete(other)
+                    }
+                }
+
+                clusters.set(item, itemCluster)
+            }
+
+            return clusters
+        }
+    </script>
+    <script>
+        // set the dimensions and margins of the graph
+        var margin = { top: 30, right: 10, bottom: 10, left: 0 },
+            width = 500 - margin.left - margin.right,
+            height = 200 - margin.top - margin.bottom;
+
+
+        //const gear = "https://gist.githubusercontent.com/AlexeyDemedetskiy/7fe5423355d0374c589cfed2ab415134/raw/fa174b80b6f58bbfb0840b79e649427804903396/example.json"
+        const gear = "/gear"
+        fetch(gear, { redirect: 'manual', credentials: "same-origin", cache: "no-store" }).then(function (response) {
+            if (response.type == "opaqueredirect") {
+                window.location.replace("/auth");
+                return
+            }
+            response.json().then(data => {
+                console.log(data)
+
+                for (clazz in data.groups) {
+                    clazzProps = data.displayProperties.class[clazz]
+                    if (clazzProps === undefined) continue
+
+                    for (slot in data.groups[clazz]) {
+                        slotProps = data.displayProperties.slots[slot]
+                        if (slotProps === undefined) continue
+
+                        for (energy in data.groups[clazz][slot]) {
+                            energyProps = data.displayProperties.energy[energy]
+                            if (energyProps === undefined) continue
+
+                            let items = data.groups[clazz][slot][energy]
+
+                            if (items.length == 0) continue
+
+                            let singleLossValue = 3
+                            let totalLossValue = 15
+
+                            items.sort((a, b) => data.items[a].total - data.items[b].total)
+                            let clusters = groupByClusters(items, (a, b) => {
+                                let statsA = Object.values(data.items[a].stats)
+                                let statsB = Object.values(data.items[b].stats)
+                                return itemIsLooser(statsA, statsB, singleLossValue, totalLossValue)
+                            })
+
+                            div = d3.select("body").append("div")
+                            groupName = ""
+                            groupName += clazzProps.name + " / "
+                            groupName += slotProps.name + " / "
+                            groupName += energyProps.name
+
+                            div.append("h2").text(groupName)
+
+                            let settings = div.append("div")
+
+                            settings.append("p").text("Trash settings:")
+
+                            let singleLabel = settings.append("label")
+                                .attr("for", "singleValueLoss")
+                                .text(`Single value loss: ${singleLossValue}`)
+                            let singleValueLoss = settings.append("input")
+                                .attr("type", "range")
+                                .attr("min", 0)
+                                .attr("value", singleLossValue)
+                                .attr("max", 5)
+                                .attr("name", "singleValueLoss")
+                                .on("input", () => {
+                                    singleLossValue = +singleValueLoss.node().value
+                                    singleLabel.text(`Single value loss: ${singleLossValue}`)
+
+                                    clusters = groupByClusters(items, (a, b) => {
+                                        let statsA = Object.values(data.items[a].stats)
+                                        let statsB = Object.values(data.items[b].stats)
+                                        return itemIsLooser(statsA, statsB, singleLossValue, totalLossValue)
+                                    })
+
+                                    for (let [item, betters] of clusters) {
+                                        d3.select("img#item-" + item)
+                                            .classed("trash", item => betters.length > 0)
+                                    }
+                                })
+
+                            settings.append("br")
+
+                            let totalLabel = settings.append("label")
+                                .attr("for", "totalLoss")
+                                .text(`Total loss: ${totalLossValue}`)
+                            let totalLoss = settings.append("input")
+                                .attr("type", "range")
+                                .attr("min", 0)
+                                .attr("value", totalLossValue)
+                                .attr("max", 30)
+                                .attr("name", "totalLoss")
+                                .on("input", () => {
+                                    totalLossValue = +totalLoss.node().value
+                                    totalLabel.text(`Total loss: ${totalLossValue}`)
+                                    clusters = groupByClusters(items, (a, b) => {
+                                        let statsA = Object.values(data.items[a].stats)
+                                        let statsB = Object.values(data.items[b].stats)
+                                        return itemIsLooser(statsA, statsB, singleLossValue, totalLossValue)
+                                    })
+                                    for (let [item, betters] of clusters) {
+                                        d3.select("img#item-" + item)
+                                            .classed("trash", item => betters.length > 0)
+                                    }
+                                })
+
+                            var grid = div.append("div")
+                                .attr("id", "grid")
+                                .attr("class", "grid")
+
+                            function handleMouseOver(item) {
+                                const path = d3.select("path#item-" + item)
+                                path.style("opacity", 1)
+                                path.style("stroke-width", 2)
+                                path.style("stroke", "red")
+
+                                for (betterItem of clusters.get(item) || []) {
+                                    d3.select("img#item-" + betterItem).classed('better', true)
+
+                                    d3.select("path#item-" + betterItem)
+                                        .style("opacity", 1)
+                                        .style("stroke-width", 2)
+                                        .style("stroke", "green")
+                                }
+                            }
+
+                            function handleMouseOut(item, i) {
+                                const path = d3.select("path#item-" + item)
+                                path.style("opacity", 0.5)
+                                path.style("stroke-width", 1)
+                                path.style("stroke", "#69b3a2")
+
+                                for (betterItem of clusters.get(item) || []) {
+                                    d3.select("img#item-" + betterItem).classed('better', false)
+
+                                    d3.select("path#item-" + betterItem)
+                                        .style("opacity", 0.5)
+                                        .style("stroke-width", 1)
+                                        .style("stroke", "#69b3a2")
+                                }
+                            }
+
+                            let chars = grid.selectAll("div")
+                                .data([...items].sort((a, b) => data.items[b].total - data.items[a].total))
+                                .enter()
+                                .append("div")
+                                .attr("class", "tooltip")
+                                .classed("dropdown", true)
+                                .on("click", function() {
+                                    for (node of document.querySelectorAll(".selected")) {
+                                        if (node == this) continue
+                                        node.classList.remove("selected")
+                                    }
+                                    this.classList.toggle("selected")
+                                })
+
+                            chars.append("img")
+                                .attr("class", "char")
+                                .classed("trash", item => (clusters.get(item) || []).length > 0)
+                                .attr("src", item => "https://www.bungie.net" + data.displayProperties.items[data.items[item].hash].icon)
+                                .attr("id", item => "item-" + item)
+                                .on("mouseover", handleMouseOver)
+                                .on("mouseout", handleMouseOut)
+
+                            let details = chars.append("div")
+                                .attr("class", "tooltiptext")
+                            
+                            details.append("pre").text(item => { 
+                                let {transfers, ...detailsContent} = data.items[item]
+                                return JSON.stringify(detailsContent, null, 2)
+                            })
+
+                            details.selectAll('button')
+                                .data(item => data.items[item].transfers)
+                                .enter()
+                                .append('button')
+                                .text(t => `Move to ${t.destination}`)
+                                .on("click", t => {
+                                    fetch(t.action)
+                                })
+                                
+                            var svg = div.append("svg")
+                                .attr("width", width + margin.left + margin.right)
+                                .attr("height", height + margin.top + margin.bottom)
+                                .append("g")
+                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                            dimensions = d3.keys(data.items[items[0]].stats)
+
+                            // For each dimension, I build a linear scale. I store all in a y object
+                            var y = {}
+                            var maxValue = d3.max(items.flatMap(item => Object.values(data.items[item].stats)))
+
+                            for (stat in dimensions) {
+                                name = dimensions[stat]
+                                y[name] = d3
+                                    .scaleLinear()
+                                    .domain([0, maxValue])
+                                    .range([height, 0])
+                            }
+
+                            // Build the X scale -> it find the best position for each Y axis
+                            x = d3
+                                .scalePoint()
+                                .range([0, width])
+                                .padding(1)
+                                .domain(dimensions);
+
+                            // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
+                            function path(item) {
+                                return d3.line()(dimensions.map(function (stat) {
+                                    return [
+                                        x(stat),
+                                        y[stat](data.items[item].stats[stat])
+                                    ]
+                                }))
+                            }
+
+                            svg
+                                .selectAll("myPath")
+                                .data(items).enter()
+                                .append("path")
+                                .attr("d", path)
+                                .attr("id", item => "item-" + item)
+                                .style("fill", "none")
+                                .style("stroke", "#69b3a2")
+                                .style("opacity", 0.5)
+
+                            // Draw the axis:
+                            svg
+                                .selectAll("myAxis")
+                                // For each dimension of the dataset I add a 'g' element:
+                                .data(dimensions).enter()
+                                .append("g")
+                                // I translate this element to its right position on the x axis
+                                .attr("transform", function (d) { return "translate(" + x(d) + ")"; })
+                                // And I build the axis with the call function
+                                .each(function (d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
+                                // Add axis title
+                                .append("text")
+                                .style("text-anchor", "middle")
+                                .attr("y", -9)
+                                .text(function (d) { return d; })
+                                .style("fill", "black")
+
+                        }
+                    }
+                }
+
+                return
+
+                allBuilds = []
+                function makeBuild(helmet, arm, chest, legs) {
+                    stats = { ...data.items[helmet].stats }
+                    for (stat in stats) {
+                        stats[stat] += data.items[arm].stats[stat]
+                        stats[stat] += data.items[chest].stats[stat]
+                        stats[stat] += data.items[legs].stats[stat]
+                    }
+
+                    tiers = Object.values(stats).map(stat => Math.floor(stat / 10))
+                    tiersKey = tiers.join("/")
+
+                    if (allBuilds[tiers] === undefined) allBuilds[tiers] = []
+
+                    allBuilds.push({
+                        tiers, tiersKey, stats, helmet, arm, chest, legs,
+                        total: Object.values(stats).reduce((a, b) => a + b, 0),
+                        tierTotal: tiers.reduce((a, b) => a + b, 0)
+                    })
+                }
+
+                total = 0
+                function formBuilds(helmets, arms, chests, legs) {
+                    debugger
+                    var numberOfBuilds = 1
+                    numberOfBuilds *= helmets.length
+                    numberOfBuilds *= arms.length
+                    numberOfBuilds *= chests.length
+                    numberOfBuilds *= legs.length
+
+                    total += numberOfBuilds
+
+                    console.log(numberOfBuilds + " builds")
+
+                    builds = []
+                    for (var helmet of helmets)
+                        for (var arm of arms)
+                            for (var chest of chests)
+                                for (var leg of legs) {
+                                    makeBuild(helmet, arm, chest, leg)
+                                }
+                }
+
+                body = d3.select("body")
+
+                builds = body.append("div")
+
+                function* makeBuilds(helmets, arms, chests, legs) {
+                    for (let [h, a, c, l] of cartesianProduct(helmets, arms, chests, legs)) {
+                        let stats = [h, a, c, l].reduce((stats, item) => {
+                            for (let key in data.items[item].stats) {
+                                stats[key] = (stats[key] || 0) + data.items[item].stats[key]
+                            }
+                            return stats
+                        }, {})
+
+                        let tiers = Object.values(stats).map(t => Math.floor(t / 10))
+
+                        let energy = [h, a, c, l].map(i => data.items[i].energy[0].toUpperCase()).join("")
+
+                        yield {
+                            helmet: h,
+                            arms: a,
+                            chest: c,
+                            legs: l,
+                            id: [h, a, c, l].join("|"),
+                            stats,
+                            total: Object.values(stats).reduce((a, b) => a + b),
+                            tiers,
+                            energy,
+                        }
+                    }
+                }
+
+                for (let clazz in data.groups) {
+                    let classContainer = builds
+                        .append("div")
+                        .attr("id", clazz)
+
+                    classContainer.append("h2").text(data.displayProperties.class[clazz].name)
+
+                    let selectedEnergyBySlot = {}
+
+                    for (let slot in data.groups[clazz]) {
+                        let slotContainer = classContainer
+                            .append("div")
+                            .attr("id", slot)
+                            .attr("class", "grid")
+                        slotContainer.append("h3").text(data.displayProperties.slots[slot].name)
+
+                        for (let energy in data.groups[clazz][slot]) {
+                            if (selectedEnergyBySlot[slot] === undefined) {
+                                selectedEnergyBySlot[slot] = energy
+                            }
+
+                            let energyContainer = slotContainer
+                                .append("div")
+                                .attr("id", energy)
+                                .style("outline", () => {
+                                    if (selectedEnergyBySlot[slot] == energy) return "solid red"
+                                })
+
+                            energyContainer
+                                .append("img")
+                                .attr("class", "char")
+                                .attr("src", "https://www.bungie.net" + data.displayProperties.energy[energy].icon)
+                                .on("click", function (...args) {
+                                    d3.select(`#${clazz} #${slot} #${selectedEnergyBySlot[slot]}`).style("outline", "")
+                                    selectedEnergyBySlot[slot] = energy
+                                    d3.select(`#${clazz} #${slot} #${selectedEnergyBySlot[slot]}`).style("outline", "solid red")
+                                })
+                        }
+                    }
+                    let modCount = 0
+                    //<input type="range" min="1" max="150" id="nRadius">
+
+                    let modCountSpan = classContainer.append("span").text(`Mod count: ${modCount}`)
+
+                    classContainer.append("input")
+                        .attr("type", "range")
+                        .attr("min", 0)
+                        .attr("value", 0)
+                        .attr("max", 5)
+                        .on("input", function (...args) {
+                            modCount = +this.value
+                            modCountSpan.text(`Mod count: ${modCount}`)
+                        })
+
+                    classContainer.append("button").text("Find Builds!!").on("click", (...args) => {
+                        const allHelmets = new Set(data.groups[clazz].helmet[selectedEnergyBySlot['helmet']])
+                        const allArms = new Set(data.groups[clazz].arms[selectedEnergyBySlot['arms']])
+                        const allChests = new Set(data.groups[clazz].chest[selectedEnergyBySlot['chest']])
+                        const allLegs = new Set(data.groups[clazz].legs[selectedEnergyBySlot['legs']])
+
+                        console.log(allHelmets, allArms, allChests, allLegs)
+
+                        let allBuilds = makeBuilds(
+                            allHelmets,
+                            allArms,
+                            allChests,
+                            allLegs,
+                        )
+
+                        let buildsByID = new Map()
+                        let buildsByTier = new Map()
+                        let buildsByTotal = new Map()
+
+                        let tiersByTotal = new Map()
+
+                        let greatBuilds = new Set()
+                        for (let build of allBuilds) {
+                            buildsByID.set(build.id, build)
+
+                            if (!buildsByTotal.has(build.total)) buildsByTotal.set(build.total, [])
+                            buildsByTotal.get(build.total).push(build.id)
+
+                            let tierID = build.tiers.join(" ")
+                            let tierTotal = build.tiers.reduce((a, b) => a + b)
+
+                            if (!buildsByTier.has(tierID)) buildsByTier.set(tierID, [])
+                            buildsByTier.get(tierID).push(build.id)
+
+                            // TODO!!
+                            if (!tiersByTotal.has(tierTotal)) tiersByTotal.set(tierTotal, new Set())
+                            tiersByTotal.get(tierTotal).add(tierID)
+                        }
+
+                        console.log(`Total builds: ${buildsByID.size}`)
+                        console.log(`Total tiers: ${buildsByTier.size}`)
+
+                        function estimate(tier) {
+                            const values = [3, 3, 4, 3, 5, 3]
+                            const estimate = tier.map((v, i) => v * values[i]).reduce(plus)
+                            return estimate
+                        }
+
+                        let tiersSortedByTotal = function* () {
+                            let sortedTotals = [...tiersByTotal.keys()].sort().reverse()
+                            for (let total of sortedTotals) {
+                                let tiers = [...tiersByTotal.get(total)].map(t => t.split(" ").map(a => +a))
+                                let sortedTiers = tiers.sort((a, b) => estimate(b) - estimate(a))
+                                yield* sortedTiers
+                            }
+                        }()
+
+                        // All builds iterated in total sorted order.
+                        // For each build we remove all lesser builds than this
+                        let tiersClusters = new Map()
+                        let tiersToProcess = new Set(tiersSortedByTotal)
+
+                        for (let tier of tiersToProcess) {
+                            tiersClusters.set(tier, new Set())
+                            tiersToProcess.delete(tier)
+                            for (let other of tiersToProcess) {
+                                let diff = tier.map((value, index) => {
+                                    return value - other[index]
+                                })
+
+                                let greatnessFactor = diff.filter(d => d > 0).reduce(plus, 0)
+                                let loosernessFactor = 0 - diff.filter(d => d < 0).reduce(plus, 0) // invert
+
+                                // is this build super?
+                                if (greatnessFactor >= loosernessFactor && loosernessFactor <= /*modCount*/0) {
+                                    tiersClusters.get(tier).add(other)
+                                    tiersToProcess.delete(other)
+                                }
+                            }
+                        }
+
+                        console.log(tiersClusters)
+                        console.log(`Clusters count: ${[...tiersClusters.keys()].length}`)
+
+                        const nextLevelClusters = new Map()
+                        for (let tier of tiersClusters.keys()) {
+                            for (let nextTier of new Set(evolve(tier, 1))) {
+                                if (!nextLevelClusters.has(nextTier)) {
+                                    nextLevelClusters.set(nextTier, [])
+                                }
+
+                                nextLevelClusters.get(nextTier).push(tier)
+                            }
+                        }
+
+                        const nextLevelToProcess = new Set(nextLevelClusters.keys())
+                        const nextLevelProcessed = new Map()
+                        for (const tier of nextLevelToProcess) {
+                            nextLevelToProcess.delete(tier)
+                            nextLevelProcessed.set(tier, new Set())
+
+                            for (const another of nextLevelToProcess) {
+                                diff = tier.split(" ").map((value, index) => {
+                                    return value - another.split(" ")[index]
+                                })
+
+                                let greatnessFactor = diff.filter(d => d > 0).reduce(plus, 0)
+                                let loosernessFactor = 0 - diff.filter(d => d < 0).reduce(plus, 0) // invert
+
+                                // is this build super?
+                                if (greatnessFactor >= loosernessFactor && loosernessFactor <= /*modCount*/0) {
+                                    nextLevelProcessed.get(tier).add(another)
+                                    nextLevelToProcess.delete(another)
+                                }
+                            }
+                        }
+
+                        const nextLevelBurned = new Set(nextLevelProcessed.keys())
+                        const precursors = new Set()
+                        for (const nextLevelTier of nextLevelBurned) {
+                            const nextTierPrecursors = nextLevelClusters.get(nextLevelTier)
+                            if (nextTierPrecursors.length > 1) continue
+                            nextLevelBurned.delete(nextLevelTier)
+                            for (const precursor of nextTierPrecursors) {
+                                precursors.add(precursor.join(" "))
+                            }
+                        }
+                        // Now only next level tiers with single precursor is processed. 
+
+                        debugger
+
+                        let topBuildsByTiers = new Map()
+                        for (let tier of tiersClusters.keys()) {
+                            topBuildsByTiers.set(tier, buildsByTier.get(tier.join(" ")))
+                        }
+
+                        let topBuilds = [...topBuildsByTiers.values()].flatMap(a => a)
+
+                        let topHelmets = new Set()
+                        let topArms = new Set()
+                        let topChests = new Set()
+                        let topLegs = new Set
+
+                        for (let id of topBuilds) {
+                            const build = buildsByID.get(id)
+                            topHelmets.add(build.helmet)
+                            topArms.add(build.arms)
+                            topChests.add(build.chest)
+                            topLegs.add(build.legs)
+                        }
+
+                        console.log(topBuildsByTiers)
+
+                        console.log(topHelmets, topArms, topChests, topLegs)
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

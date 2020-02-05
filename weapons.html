@@ -1,0 +1,181 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Weapons | My warmind</title>
+    <meta name="description" content="My warmind">
+    <meta name="author" content="Rasputin">
+</head>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+    @media (orientation:portrait) {
+        svg {
+            width: 100vw;
+            height: 100vw;
+        }
+    }
+
+    @media (orientation:landscape) {
+        svg {
+            width: 100vh;
+            height: 100vh;
+        }
+    }
+</style>
+
+<script>
+    _ = async function () { data() }()
+    async function data() {
+        let url = "https://gist.githubusercontent.com/AlexeyDemedetskiy/9a4ba9013c9c09392713088b9e3722d2/raw/5f9fa3bef7c6c421b35ab863aee87251c2b7c922/example-weapons.json"
+        let response = await fetch(url)
+        let weapons = await response.json()
+
+        console.log(weapons)
+
+        let width = 1000
+        let height = 1000
+
+        let outerRadius = Math.min(width, height) * 0.5
+        let innerRadius = outerRadius - 124
+
+        let chord = d3.chord()
+            .padAngle(.02)
+            .sortSubgroups(d3.descending)
+            .sortChords(d3.descending)
+
+        let arc = d3.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(innerRadius + 20)
+
+        let ribbon = d3.ribbon()
+            .radius(innerRadius)
+
+        let color = d3.scaleOrdinal(d3.schemeCategory10)
+
+        const svg = d3.select("body").append("svg")
+            .attr("viewBox", [-width / 2, -height / 2, width, height])
+            .attr("font-size", 12)
+            .attr("font-family", "sans-serif")
+
+        // Build matrix from weapons categories
+        let categories = Object.keys(weapons.instancesByCategories)
+        categories.sort((a, b) => weapons.instancesByCategories[b].length - weapons.instancesByCategories[a].length)
+
+        let matrix = []
+        for (let sourceCategory of categories) {
+            let sourceSet = weapons.instancesByCategories[sourceCategory]
+            let sourceFlow = []
+            matrix.push(sourceFlow)
+            for (let targetCategory of categories) {
+                if (sourceCategory === targetCategory) {
+                    sourceFlow.push(0)
+                    continue
+                }
+                let targetSet = new Set(weapons.instancesByCategories[targetCategory])
+                let commonItems = sourceSet.filter(Set.prototype.has, targetSet)
+
+                sourceFlow.push(commonItems.length)
+            }
+        }
+
+        const chords = chord(matrix)
+
+        const group = svg.append("g")
+            .selectAll("g")
+            .data(chords.groups)
+            .join("g");
+
+        function onMouseOver(selected) {
+
+            if (selected.index !== undefined) {
+                group
+                    .filter(d => d.index !== selected.index)
+                    .style("opacity", 0.3);
+
+                svg.selectAll(".chord")
+                    .filter(d => (d.source.index !== selected.index) && (d.target.index !== selected.index))
+                    .style("opacity", 0.3);
+            }
+            if (selected.source !== undefined) {
+                group
+                    .filter(d => (d.index !== selected.source.index) && (d.index !== selected.target.index))
+                    .style("opacity", 0.3);
+
+                svg.selectAll(".chord")
+                    .filter(d => d !== selected)
+                    .style("opacity", 0.3);
+            }
+        }
+
+        function onMouseOut() {
+            group.style("opacity", 1);
+            svg.selectAll(".chord").style("opacity", 1);
+        }
+
+        group.append("path")
+            .attr("fill", d => color(d.index))
+            .attr("stroke", d => color(d.index))
+            .attr("d", arc)
+            .on("mouseover", onMouseOver)
+            .on("mouseout", onMouseOut);
+
+        group.append("text")
+            .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })
+            .attr("dy", ".35em")
+            .attr("transform", d => `
+                rotate(${(d.angle * 180 / Math.PI - 90)})
+                translate(${innerRadius + 26})
+                ${d.angle > Math.PI ? "rotate(180)" : ""}
+                `)
+            .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
+            .text(d => weapons.definitions.categories[categories[d.index]].displayProperties.name);
+
+
+        function getGradID(d) { return "linkGrad-" + d.source.index + "-" + d.target.index; }
+
+        var grads = svg.append("defs")
+            .selectAll("linearGradient")
+            .data(chords)
+            .enter()
+            .append("linearGradient")
+            .attr("id", getGradID)
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", function (d) { return innerRadius * Math.cos((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2); })
+            .attr("y1", function (d) { return innerRadius * Math.sin((d.source.endAngle - d.source.startAngle) / 2 + d.source.startAngle - Math.PI / 2); })
+            .attr("x2", function (d) { return innerRadius * Math.cos((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2); })
+            .attr("y2", function (d) { return innerRadius * Math.sin((d.target.endAngle - d.target.startAngle) / 2 + d.target.startAngle - Math.PI / 2); })
+
+        // set the starting color (at 0%)
+        grads.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", function (d) { return color(d.source.index) })
+
+        //set the ending color (at 100%)
+        grads.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", function (d) { return color(d.target.index) })
+
+        svg.append("g")
+            .attr("fill-opacity", 0.67)
+            .selectAll("path")
+            .data(chords)
+            .join("path")
+            .attr("class", "chord")
+            .attr("stroke", d => d3.rgb(color(0)).darker())
+            .style("fill", d => `url(#${getGradID(d)})`)
+            .attr("d", ribbon)
+            .on("mouseover", d => onMouseOver(d))
+            .on("mouseout", d => onMouseOut(d));
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
