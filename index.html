@@ -60,6 +60,20 @@
             outline: solid limegreen
         }
 
+        .lightLevel {
+            display: inline-block;
+            border-radius: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            position: absolute;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            z-index: 2;
+            bottom: 3px;
+            right: 3px;
+            font-size: small;
+        }
+
     </style>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
@@ -154,8 +168,8 @@
             height = 200 - margin.top - margin.bottom;
 
 
-        //const gear = "https://gist.githubusercontent.com/AlexeyDemedetskiy/7fe5423355d0374c589cfed2ab415134/raw/fa174b80b6f58bbfb0840b79e649427804903396/example.json"
-        const gear = "/gear"
+        const gear = "https://gist.githubusercontent.com/AlexeyDemedetskiy/7fe5423355d0374c589cfed2ab415134/raw/fa174b80b6f58bbfb0840b79e649427804903396/example.json"
+        // const gear = "/gear"
         fetch(gear, { redirect: 'manual', credentials: "same-origin", cache: "no-store" }).then(function (response) {
             if (response.type == "opaqueredirect") {
                 window.location.replace("/auth");
@@ -310,10 +324,14 @@
                                 .on("mouseover", handleMouseOver)
                                 .on("mouseout", handleMouseOut)
 
+                            chars.append("div")
+                                .text(item => data.items[item].defence)
+                                .attr("class", "lightLevel")
+
                             let details = chars.append("div")
                                 .attr("class", "tooltiptext")
-                            
-                            details.append("pre").text(item => { 
+
+                            details.append("pre").text(item => {
                                 let {transfers, ...detailsContent} = data.items[item]
                                 return JSON.stringify(detailsContent, null, 2)
                             })
@@ -326,7 +344,7 @@
                                 .on("click", t => {
                                     fetch(t.action)
                                 })
-                                
+
                             var svg = div.append("svg")
                                 .attr("width", width + margin.left + margin.right)
                                 .attr("height", height + margin.top + margin.bottom)
@@ -652,7 +670,7 @@
                                 precursors.add(precursor.join(" "))
                             }
                         }
-                        // Now only next level tiers with single precursor is processed. 
+                        // Now only next level tiers with single precursor is processed.
 
                         debugger
 
