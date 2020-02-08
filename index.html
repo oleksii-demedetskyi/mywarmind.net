@@ -168,8 +168,8 @@
             height = 200 - margin.top - margin.bottom;
 
 
-        const gear = "https://gist.githubusercontent.com/AlexeyDemedetskiy/7fe5423355d0374c589cfed2ab415134/raw/fa174b80b6f58bbfb0840b79e649427804903396/example.json"
-        // const gear = "/gear"
+        //const gear = "https://gist.githubusercontent.com/AlexeyDemedetskiy/7fe5423355d0374c589cfed2ab415134/raw/fa174b80b6f58bbfb0840b79e649427804903396/example.json"
+        const gear = "/gear"
         fetch(gear, { redirect: 'manual', credentials: "same-origin", cache: "no-store" }).then(function (response) {
             if (response.type == "opaqueredirect") {
                 window.location.replace("/auth");
