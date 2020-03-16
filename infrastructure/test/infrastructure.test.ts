@@ -1,8 +1,8 @@
-import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
+import { expect, haveResource } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
 import Infrastructure = require('../lib/infrastructure-stack');
 
-test('MyWarmind Stack', () => {
+test('My Warmind Stack', () => {
     // WTF - this is not working!!!
     // expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot()
     const stack = new Infrastructure.InfrastructureStack(new cdk.App(), 'MyTestStack');
@@ -19,9 +19,60 @@ test('MyWarmind Stack', () => {
     expect(stack).to(haveResource('AWS::ApiGateway::Method', {
         HttpMethod: 'GET',
     }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Resource', {
+        PathPart: 'gear'
+    }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Method', {
+        HttpMethod: 'GET'
+    }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Resource', {
+        PathPart: 'transfer'
+    }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Method', {
+        HttpMethod: 'GET'
+    }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Resource', {
+        PathPart: 'weapons'
+    }))
+    expect(stack).to(haveResource('AWS::ApiGateway::Method', {
+        HttpMethod: 'GET'
+    }))
     expect(stack).to(haveResource('AWS::Lambda::Function', {
         Code: {
-            ZipFile: '../services/auth.py'
+            ZipFile: '../services/gear.py'
+        },
+        Handler: 'lambda_function.lambda_handler',
+        Runtime: 'python2.7',
+        Layers: [
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
+        ]
+    }))
+    expect(stack).to(haveResource('AWS::Lambda::Function', {
+        Code: {
+            ZipFile: '../services/gear.py'
+        },
+        Handler: 'lambda_function.lambda_handler',
+        Runtime: 'python2.7',
+        Layers: [
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
+        ]
+    }))
+    expect(stack).to(haveResource('AWS::Lambda::Function', {
+        Code: {
+            ZipFile: '../services/transfer.py'
+        },
+        Handler: 'lambda_function.lambda_handler',
+        Runtime: 'python2.7',
+        Layers: [
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
+            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
+        ]
+    }))
+    expect(stack).to(haveResource('AWS::Lambda::Function', {
+        Code: {
+            ZipFile: '../services/weapons.py'
         },
         Handler: 'lambda_function.lambda_handler',
         Runtime: 'python2.7',
