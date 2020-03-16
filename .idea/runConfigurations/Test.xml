@@ -3,8 +3,9 @@
     <config-file value="$PROJECT_DIR$/infrastructure/jest.config.js" />
     <node-interpreter value="project" />
     <node-options value="" />
-    <jest-package value="" />
+    <jest-package value="$PROJECT_DIR$/infrastructure/node_modules/jest" />
     <working-dir value="$PROJECT_DIR$" />
+    <jest-options value="--watch" />
     <envs />
     <scope-kind value="ALL" />
     <method v="2" />

@@ -13,7 +13,7 @@ export default function(stack: cdk.Stack, api: RestApi, layers: ILayerVersion[])
 
     // WTF - this isn't working - gives error - "The REST API doesn't contain any methods"
     // const method = api.root.addMethod('GET', new AwsIntegration( { service: 's3' } ))
-
+    
     const auth = api.root.addResource('auth')
     auth.addMethod('GET', new LambdaIntegration(handler))
 }
