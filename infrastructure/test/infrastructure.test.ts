@@ -1,13 +1,14 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
+import { expect, SynthUtils } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
 import Infrastructure = require('../lib/infrastructure-stack');
 
-test('Empty Stack', () => {
-    const app = new cdk.App();
-    // WHEN
-    const stack = new Infrastructure.InfrastructureStack(app, 'MyTestStack');
-    // THEN
-    expectCDK(stack).to(matchTemplate({
-      "Resources": {}
-    }, MatchStyle.EXACT))
+test('MyWarmind Stack', () => {
+    const stack = new Infrastructure.InfrastructureStack(new cdk.App(), 'MyTestStack');
+    // @ts-ignore
+    expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot()
 });
+
+// test('MyWarmind ApiGateway', () => {
+//
+// })
+
