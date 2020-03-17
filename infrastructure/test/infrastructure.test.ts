@@ -74,11 +74,8 @@ describe('My Warmind stack', () => {
 
     test('have gear lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            Code: {
-                ZipFile: '../services/gear.py'
-            },
             Handler: 'lambda_function.lambda_handler',
-            Runtime: 'python2.7',
+            Runtime: 'python3.8',
             Layers: [
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
@@ -88,11 +85,8 @@ describe('My Warmind stack', () => {
 
     test('have auth lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            Code: {
-                ZipFile: '../services/auth.py'
-            },
             Handler: 'lambda_function.lambda_handler',
-            Runtime: 'python2.7',
+            Runtime: 'python3.8',
             Layers: [
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
@@ -102,11 +96,8 @@ describe('My Warmind stack', () => {
 
     test('have transfer lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            Code: {
-                ZipFile: '../services/transfer.py'
-            },
             Handler: 'lambda_function.lambda_handler',
-            Runtime: 'python2.7',
+            Runtime: 'python3.8',
             Layers: [
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
@@ -116,11 +107,8 @@ describe('My Warmind stack', () => {
 
     test('have weapons lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            Code: {
-                ZipFile: '../services/weapons.py'
-            },
             Handler: 'lambda_function.lambda_handler',
-            Runtime: 'python2.7',
+            Runtime: 'python3.8',
             Layers: [
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
                 "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"

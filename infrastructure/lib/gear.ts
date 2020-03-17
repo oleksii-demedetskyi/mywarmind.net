@@ -5,9 +5,9 @@ import { Code, ILayerVersion } from "@aws-cdk/aws-lambda";
 
 export default function(stack: cdk.Stack, api: RestApi, layers: ILayerVersion[]) {
     const handler = new lambda.Function(stack, 'gear-handler', {
-        code: Code.fromInline('../services/gear.py'),
+        code: Code.fromAsset('../services/gear'),
         layers,
-        runtime: lambda.Runtime.PYTHON_2_7,
+        runtime: lambda.Runtime.PYTHON_3_8,
         handler: 'lambda_function.lambda_handler'
     });
 
