@@ -115,4 +115,15 @@ describe('My Warmind stack', () => {
             ]
         }))
     })
+
+    test('have update manifest lambda', () => {
+        expect(stack).to(haveResource('AWS::Lambda::Function', {
+            Handler: 'lambda_function.lambda_handler',
+            Runtime: 'python3.8',
+            Layers: [
+                "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
+                "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
+            ]
+        }))
+    })
 })

@@ -5,6 +5,7 @@ import gear from "./gear";
 import { LayerVersion } from "@aws-cdk/aws-lambda";
 import transfer from "./transfer";
 import weapons from "./weapons";
+import updateManifest from "./update-manifest"
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -20,5 +21,6 @@ export class InfrastructureStack extends cdk.Stack {
     gear(this, api, layers)
     transfer(this, api, layers)
     weapons(this, api, layers)
+    updateManifest(this, layers)
   }
 }
