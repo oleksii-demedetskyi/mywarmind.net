@@ -5,6 +5,7 @@ import { ILayerVersion, Code } from "@aws-cdk/aws-lambda";
 
 export default function(stack: cdk.Stack, api: RestApi, layers: ILayerVersion[]) {
     const handler = new lambda.Function(stack, 'weapons-handler', {
+        functionName: 'Weapons',
         code: Code.fromAsset('../services/weapons'),
         layers,
         runtime: lambda.Runtime.PYTHON_3_8,
