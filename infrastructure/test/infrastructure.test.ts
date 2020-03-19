@@ -82,35 +82,35 @@ describe('My Warmind stack', () => {
 
     test('have gear lambda', () => {
         expect(stack).to(countResourcesLike('AWS::Lambda::Function',1,{
-            FunctionName: 'Transfer',
+            FunctionName: 'infra-mywarmind-gear',
             ...lambdaEnvironment,
         }))
     })
 
     test('have auth lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            FunctionName: 'Auth',
+            FunctionName: 'infra-mywarmind-auth',
             ...lambdaEnvironment
         }))
     })
 
     test('have transfer lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            FunctionName: 'Transfer',
+            FunctionName: 'infra-mywarmind-transfer',
             ...lambdaEnvironment
         }))
     })
 
     test('have weapons lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            FunctionName: 'Weapons',
+            FunctionName: 'infra-mywarmind-weapons',
             ...lambdaEnvironment
         }))
     })
 
     test('have update manifest lambda', () => {
         expect(stack).to(haveResource('AWS::Lambda::Function', {
-            FunctionName: 'UpdateManifest',
+            FunctionName: 'infra-mywarmind-update-manifest',
             ...lambdaEnvironment
         }))
     })

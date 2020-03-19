@@ -5,7 +5,7 @@ import { ILayerVersion, Code } from "@aws-cdk/aws-lambda";
 
 export default function(stack: cdk.Stack, layers: ILayerVersion[]) {
     new lambda.Function(stack, 'update-manifest-handler', {
-        functionName: 'UpdateManifest',
+        functionName: 'infra-mywarmind-update-manifest',
         code: Code.fromAsset('../services/update-manifest'),
         layers,
         runtime: lambda.Runtime.PYTHON_3_8,
