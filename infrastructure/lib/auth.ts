@@ -5,7 +5,7 @@ import { AwsIntegration, LambdaIntegration, RestApi } from "@aws-cdk/aws-apigate
 
 export default function(stack: cdk.Stack, api: RestApi, layers: ILayerVersion[]) {
     const handler = new lambda.Function(stack, 'auth-handler', {
-        functionName: 'Auth',
+        functionName: 'infra-mywarmind-auth',
         code: Code.fromAsset('../services/auth'),
         layers,
         runtime: lambda.Runtime.PYTHON_3_8,
