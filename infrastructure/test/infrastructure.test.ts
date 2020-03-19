@@ -11,7 +11,7 @@ describe('My Warmind stack', () => {
 
     test('have rest api', () => {
         expect(stack).to(haveResource('AWS::ApiGateway::RestApi', {
-            Name: 'mywarmind'
+            Name: 'infra-mywarmind'
         }))
         expect(stack).to(countResources('AWS::ApiGateway::RestApi', 1))
     })
