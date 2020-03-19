@@ -75,8 +75,8 @@ describe('My Warmind stack', () => {
         Handler: 'lambda_function.lambda_handler',
         Runtime: 'python3.8',
         Layers: [
-            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-requests:8",
-            "arn:aws:lambda:us-east-2:113088814899:layer:Klayers-python37-aws-xray-sdk:15"
+            "arn:aws:lambda:us-east-2:770693421928:layer:Klayers-python38-requests:2",
+            "arn:aws:lambda:us-east-2:770693421928:layer:Klayers-python38-aws-xray-sdk:14"
         ]
     }
 
