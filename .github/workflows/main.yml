@@ -1,0 +1,81 @@
+name: mywarmind.net CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+        working-directory: ./infrastructure
+
+      - run: npm run build --if-present
+        working-directory: ./infrastructure
+
+      - run: npm test
+        working-directory: ./infrastructure
+        env:
+          CI: true
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Pre-deploy
+        run: npm run ci-pre-deploy
+        working-directory: ./infrastructure
+
+      - run: npm run cdk diff 2>&1 | tee diff.md
+        working-directory: ./infrastructure
+
+      - name: Read diff.md
+        id: read_diff_md
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./infrastructure/diff.md
+
+      - name: Comment PR
+        uses: actions/github@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: comment ```${{ steps.read_diff_md.outputs.content }}```
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Deploy
+        run: npm run ci-deploy
+        working-directory: ./infrastructure

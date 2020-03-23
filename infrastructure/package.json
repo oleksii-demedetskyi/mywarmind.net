@@ -9,7 +9,10 @@
     "watch": "tsc -w",
     "test": "jest",
     "test-watch": "jest --watch",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "ci-diff" : "cdk diff --no-color",
+    "ci-pre-deploy" : "cdk deploy --require-approval never --no-execute",
+    "ci-deploy": "cdk deploy --require-approval never"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.27.0",
