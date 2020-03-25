@@ -9,7 +9,10 @@
     "watch": "tsc -w",
     "test": "jest",
     "test-watch": "jest --watch",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "ci-diff" : "cdk diff --no-color",
+    "ci-pre-deploy" : "cdk deploy --require-approval never --no-execute",
+    "ci-deploy": "cdk deploy --require-approval never"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.27.0",
@@ -22,8 +25,11 @@
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.27.0",
-    "@aws-cdk/aws-lambda": "^1.27.0",
+    "@aws-cdk/aws-apigateway": "1.27.0",
+    "@aws-cdk/aws-iam": "1.27.0",
+    "@aws-cdk/aws-lambda": "1.27.0",
+    "@aws-cdk/aws-s3": "1.27.0",
+    "@aws-cdk/aws-s3-deployment": "1.27.0",
     "@aws-cdk/core": "1.27.0",
     "source-map-support": "^0.5.16"
   },
