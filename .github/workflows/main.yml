@@ -56,6 +56,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Copy to public folder (temporary step)
+        run: mkdir -p "public" && cp index.html $_
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
