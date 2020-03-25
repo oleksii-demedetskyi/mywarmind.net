@@ -1,0 +1,51 @@
+name: mywarmind.net PR CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Copy to public folder (temporary step)
+        run: mkdir -p "public" && cp index.html $_
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - run: npm ci
+        working-directory: ./infrastructure
+
+      - run: npm run cdk diff 2>&1 | tee diff.md
+        working-directory: ./infrastructure
+
+      - name: Read diff.md
+        id: read_diff_md
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./infrastructure/diff.md
+
+      - name: Comment PR
+        if: github.event.pull_request != ""
+        uses: actions/github@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: comment ```${{ steps.read_diff_md.outputs.content }}```
