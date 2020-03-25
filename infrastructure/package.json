@@ -10,8 +10,8 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "cdk": "cdk",
-    "ci-diff" : "cdk diff --no-color",
-    "ci-pre-deploy" : "cdk deploy --require-approval never --no-execute",
+    "ci-diff": "cdk diff --no-color",
+    "ci-pre-deploy": "cdk deploy --require-approval never --no-execute",
     "ci-deploy": "cdk deploy --require-approval never"
   },
   "devDependencies": {
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "1.27.0",
+    "@aws-cdk/aws-dynamodb": "1.27.0",
     "@aws-cdk/aws-iam": "1.27.0",
     "@aws-cdk/aws-lambda": "1.27.0",
     "@aws-cdk/aws-s3": "1.27.0",

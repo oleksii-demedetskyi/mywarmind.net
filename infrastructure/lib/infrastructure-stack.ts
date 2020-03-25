@@ -1,16 +1,18 @@
 import * as cdk from '@aws-cdk/core';
 import auth from './auth'
 import * as apiGateway from "@aws-cdk/aws-apigateway";
+import { AwsIntegration } from "@aws-cdk/aws-apigateway";
 import gear from "./gear";
 import { LayerVersion } from "@aws-cdk/aws-lambda";
 import transfer from "./transfer";
 import weapons from "./weapons";
 import updateManifest from "./update-manifest"
-import { AwsIntegration } from "@aws-cdk/aws-apigateway";
 import * as iam from '@aws-cdk/aws-iam'
+import { ServicePrincipal } from '@aws-cdk/aws-iam'
 import { Bucket } from "@aws-cdk/aws-s3";
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment'
-import { ServicePrincipal } from "@aws-cdk/aws-iam";
+import * as dynamodb from '@aws-cdk/aws-dynamodb'
+import { AttributeType } from '@aws-cdk/aws-dynamodb'
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -39,5 +41,10 @@ export class InfrastructureStack extends cdk.Stack {
     transfer(this, api, layers)
     weapons(this, api, layers)
     updateManifest(this, layers)
+
+    new dynamodb.Table(this, 'infra-mywarmind-table', {
+      partitionKey: { name: 'partition', type: AttributeType.STRING },
+      sortKey: { name: 'sort', type: AttributeType.STRING }
+    })
   }
 }
