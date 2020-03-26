@@ -79,7 +79,7 @@ def lambda_handler(event, context):
         print(f"PROCESSING {message['component']}: {start} - {end}")
 
         dynamoDB = boto3.resource('dynamodb')
-        table = dynamoDB.Table("infra-mywarmind")
+        table = dynamoDB.Table("mywarmind-table")
 
         with table.batch_writer() as batch:
             for hash in chunk:

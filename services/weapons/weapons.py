@@ -59,7 +59,7 @@ def fetchItems(hashes, projections, l18n = 'en'):
         response = dynamodb.batch_get_item(
             ReturnConsumedCapacity = 'TOTAL',
             RequestItems = {
-                'mywarmind': {
+                'mywarmind-table': {
                     'Keys': bulk,
                     'ProjectionExpression': ", ".join(projections),
                     'ExpressionAttributeNames': {

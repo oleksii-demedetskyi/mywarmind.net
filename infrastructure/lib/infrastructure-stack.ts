@@ -11,8 +11,7 @@ import * as iam from '@aws-cdk/aws-iam'
 import { ServicePrincipal } from '@aws-cdk/aws-iam'
 import { Bucket } from "@aws-cdk/aws-s3";
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment'
-import * as dynamodb from '@aws-cdk/aws-dynamodb'
-import { AttributeType } from '@aws-cdk/aws-dynamodb'
+import { definitions, general } from "./mywarmind-table";
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -41,10 +40,7 @@ export class InfrastructureStack extends cdk.Stack {
     transfer(this, api, layers)
     weapons(this, api, layers)
     updateManifest(this, layers)
-
-    new dynamodb.Table(this, 'infra-mywarmind-table', {
-      partitionKey: { name: 'partition', type: AttributeType.STRING },
-      sortKey: { name: 'sort', type: AttributeType.STRING }
-    })
+    general(this)
+    definitions(this)
   }
 }
