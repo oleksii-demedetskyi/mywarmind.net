@@ -47,7 +47,6 @@ jobs:
 
   deploy:
     needs: check
-    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     strategy:
       matrix:

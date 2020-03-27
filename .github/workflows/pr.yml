@@ -23,13 +23,6 @@ jobs:
       - name: Copy to public folder (temporary step)
         run: mkdir -p "public" && cp index.html $_
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
-
       - run: npm ci
         working-directory: ./infrastructure
 
