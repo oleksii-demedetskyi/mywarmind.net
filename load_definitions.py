@@ -2,7 +2,7 @@ import requests
 import boto3
 
 dynamoDB = boto3.resource('dynamodb')
-table = dynamoDB.Table("MyWarmind-Definitions")
+table = dynamoDB.Table("definitions-table")
 
 manifests = requests.get("https://www.bungie.net/Platform/Destiny2/Manifest/")
 
@@ -18,10 +18,10 @@ with table.batch_writer() as batch:
         for hash in world[component]:
             counter += 1
             if counter % 100 == 0: print(counter)
-            
+
             item = world[component][hash]
             item["component"] = component
-            
+
             batch.put_item(Item = dict_to_dynamo(item))
 
 print(counter)
