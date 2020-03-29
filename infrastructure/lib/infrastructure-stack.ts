@@ -20,9 +20,9 @@ export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const kLayers = LayerVersion.fromLayerVersionArn(this, 'k-layers', 'arn:aws:lambda:us-east-2:770693421928:layer:Klayers-python38-requests:2');
-    const xRay = LayerVersion.fromLayerVersionArn(this, 'x-ray', 'arn:aws:lambda:us-east-2:770693421928:layer:Klayers-python38-aws-xray-sdk:14');
-    const layers = [kLayers, xRay]
+    const requests = LayerVersion.fromLayerVersionArn(this, 'requests', 'arn:aws:lambda:us-east-2:956931160472:layer:requests:1');
+    const xRay = LayerVersion.fromLayerVersionArn(this, 'x-ray', 'arn:aws:lambda:us-east-2:956931160472:layer:aws-xray-sdk:1');
+    const layers = [requests, xRay]
 
     const api = new apiGateway.RestApi(this, 'warmind-gateway', { restApiName: 'infra-mywarmind' });
 
