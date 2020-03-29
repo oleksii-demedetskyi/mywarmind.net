@@ -12,6 +12,9 @@ import { ServicePrincipal } from '@aws-cdk/aws-iam'
 import { Bucket } from "@aws-cdk/aws-s3";
 import * as s3Deploy from '@aws-cdk/aws-s3-deployment'
 import { definitions, general } from "./mywarmind-table";
+import * as sns from '@aws-cdk/aws-sns'
+import * as subs from '@aws-cdk/aws-sns-subscriptions'
+import warmindDefinitions from './definitions'
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -42,5 +45,11 @@ export class InfrastructureStack extends cdk.Stack {
     updateManifest(this, layers)
     general(this)
     definitions(this)
+
+    const dynamoDbTopic = new sns.Topic(this, 'infra-mywarmind-definitions-import', {
+      displayName: 'mywarmind definitions import topic'
+    })
+    const warmindDefFn = warmindDefinitions(this, layers)
+    dynamoDbTopic.addSubscription(new subs.LambdaSubscription(warmindDefFn))
   }
 }
