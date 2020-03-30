@@ -2,3 +2,4 @@
 !.idea/runConfigurations/**/*.*
 public
 .env
+.DS_Store

@@ -1,7 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import auth from './auth'
 import * as apiGateway from "@aws-cdk/aws-apigateway";
-import { AwsIntegration } from "@aws-cdk/aws-apigateway";
+import { AwsIntegration, EndpointType } from "@aws-cdk/aws-apigateway";
 import gear from "./gear";
 import { LayerVersion } from "@aws-cdk/aws-lambda";
 import transfer from "./transfer";
@@ -24,7 +24,10 @@ export class InfrastructureStack extends cdk.Stack {
     const xRay = LayerVersion.fromLayerVersionArn(this, 'x-ray', 'arn:aws:lambda:us-east-2:956931160472:layer:aws-xray-sdk:1');
     const layers = [requests, xRay]
 
-    const api = new apiGateway.RestApi(this, 'warmind-gateway', { restApiName: 'infra-mywarmind' });
+    const api = new apiGateway.RestApi(this, 'warmind-gateway', {
+      restApiName: 'infra-mywarmind',
+      endpointConfiguration: { types: [EndpointType.REGIONAL] }
+    });
 
     const bucket = new Bucket(this, 'infra-mywarmind')
     new s3Deploy.BucketDeployment(this, 'infra-mywarmind-bucket-deploy', {
