@@ -1,7 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import auth from './auth'
 import * as apiGateway from "@aws-cdk/aws-apigateway";
-import { AwsIntegration, EndpointType } from "@aws-cdk/aws-apigateway";
+import { AwsIntegration, EndpointType, PassthroughBehavior } from "@aws-cdk/aws-apigateway";
 import gear from "./gear";
 import { LayerVersion } from "@aws-cdk/aws-lambda";
 import transfer from "./transfer";
@@ -20,10 +20,6 @@ export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const requests = LayerVersion.fromLayerVersionArn(this, 'requests', 'arn:aws:lambda:us-east-2:956931160472:layer:requests:1');
-    const xRay = LayerVersion.fromLayerVersionArn(this, 'x-ray', 'arn:aws:lambda:us-east-2:956931160472:layer:aws-xray-sdk:1');
-    const layers = [requests, xRay]
-
     const api = new apiGateway.RestApi(this, 'warmind-gateway', {
       restApiName: 'infra-mywarmind',
       endpointConfiguration: { types: [EndpointType.REGIONAL] }
@@ -38,8 +34,23 @@ export class InfrastructureStack extends cdk.Stack {
     const role = new iam.Role(this, 'infra-mywarmind-read-s3', { assumedBy: new ServicePrincipal('s3')})
     bucket.grantRead(role)
 
-    const s3Integration = new AwsIntegration( { service: 's3', path: 'mywarmind.net/index.html', options: { credentialsRole: role }})
-    api.root.addMethod('GET', s3Integration)
+    const s3Integration = new AwsIntegration( {
+      service: 's3',
+      path: 'mywarmind.net/index.html',
+      options: {
+        credentialsRole: role,
+        passthroughBehavior: PassthroughBehavior.WHEN_NO_MATCH,
+        integrationResponses: [{
+          statusCode: "200",
+          selectionPattern: "200",
+        }]
+      },
+    })
+    api.root.addMethod('GET', s3Integration, { methodResponses: [{ statusCode: "200" }]})
+
+    const requests = LayerVersion.fromLayerVersionArn(this, 'requests', 'arn:aws:lambda:us-east-2:956931160472:layer:requests:1');
+    const xRay = LayerVersion.fromLayerVersionArn(this, 'x-ray', 'arn:aws:lambda:us-east-2:956931160472:layer:aws-xray-sdk:1');
+    const layers = [requests, xRay]
 
     auth(this, api, layers)
     gear(this, api, layers)
