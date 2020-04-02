@@ -49,7 +49,7 @@ export class InfrastructureStack extends cdk.Stack {
         const s3Integration = new AwsIntegration({
             integrationHttpMethod: "GET",
             service: 's3',
-            path: 'mywarmind.net/index.html',
+            path: `${bucket.bucketName}/index.html`,
             options: {
                 credentialsRole: role,
                 requestParameters: {
