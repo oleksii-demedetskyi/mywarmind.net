@@ -1,7 +1,13 @@
 import * as cdk from '@aws-cdk/core';
 import auth from './auth'
 import * as apiGateway from "@aws-cdk/aws-apigateway";
-import { AwsIntegration, ContentHandling, EndpointType, PassthroughBehavior } from "@aws-cdk/aws-apigateway";
+import {
+    AwsIntegration,
+    ContentHandling,
+    EmptyModel,
+    EndpointType, Model,
+    PassthroughBehavior
+} from "@aws-cdk/aws-apigateway";
 import gear from "./gear";
 import { LayerVersion } from "@aws-cdk/aws-lambda";
 import transfer from "./transfer";
@@ -22,7 +28,13 @@ export class InfrastructureStack extends cdk.Stack {
 
         const api = new apiGateway.RestApi(this, 'warmind-gateway', {
             restApiName: 'infra-mywarmind',
-            endpointConfiguration: {types: [EndpointType.REGIONAL]}
+            endpointConfiguration: {types: [EndpointType.REGIONAL]},
+            deployOptions: {
+                loggingLevel: apiGateway.MethodLoggingLevel.ERROR,
+                dataTraceEnabled: true,
+                tracingEnabled: true,
+                metricsEnabled: true
+            }
         });
 
         const bucket = new Bucket(this, 'infra-mywarmind')
@@ -31,7 +43,7 @@ export class InfrastructureStack extends cdk.Stack {
             destinationBucket: bucket
         })
 
-        const role = new iam.Role(this, 'infra-mywarmind-read-s3', {assumedBy: new ServicePrincipal('s3')})
+        const role = new iam.Role(this, 'infra-mywarmind-read-s3', { assumedBy: new ServicePrincipal('apigateway') })
         bucket.grantRead(role)
 
         const s3Integration = new AwsIntegration({
@@ -39,22 +51,23 @@ export class InfrastructureStack extends cdk.Stack {
             service: 's3',
             path: 'mywarmind.net/index.html',
             options: {
+                credentialsRole: role,
                 requestParameters: {
                     "integration.request.header.Content-Type": "method.request.header.Content-Type",
                     "integration.request.header.Content-Disposition": "method.request.header.Content-Disposition"
                 },
-                credentialsRole: role,
                 passthroughBehavior: PassthroughBehavior.WHEN_NO_MATCH,
                 integrationResponses: [{
                     statusCode: "200",
                     selectionPattern: "200",
                     responseParameters: {
-                      "method.response.header.Content-Type" : "integration.response.header.Content-Type",
-                      "method.response.header.Content-Disposition" : "integration.response.header.Content-Disposition"
+                        "method.response.header.Content-Type": "integration.response.header.Content-Type",
+                        "method.response.header.Content-Disposition": "integration.response.header.Content-Disposition"
                     }
                 }]
             },
         })
+
         api.root.addMethod('GET', s3Integration, {
             requestParameters: {
                 "method.request.header.Content-Type": false,
@@ -65,7 +78,7 @@ export class InfrastructureStack extends cdk.Stack {
                 responseParameters: {
                     "method.response.header.Content-Type": false,
                     "method.response.header.Content-Disposition": false
-                }
+                },
             }]
         })
 
